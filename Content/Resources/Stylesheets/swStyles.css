@@ -1,0 +1,1926 @@
+@namespace MadCap url(http://www.madcapsoftware.com/Schemas/MadCap.xsd);
+/*<meta />*/
+
+/* This style sheet is to be used for *new* DOCUMENTATION articles for the website (i.e. HTML5) */
+/* Last updated: 12/1/15 */
+
+
+body
+{
+	line-height: 120%;
+	font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif;
+	background-color: #e1e2e5;
+}
+
+/* ===================================================== */
+/* Headings */
+/* ===================================================== */
+
+h1,
+h2,
+h3,
+h5,
+h6
+{
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+	font-weight: normal;
+	margin-left: 0;
+	color: #313337;
+	line-height: 120%;
+	margin-bottom: 0;
+}
+
+h1
+{
+	font-size: 2.25em;
+	margin-top: 0px;
+	margin-bottom: 24px;
+	border-bottom: solid 1px #bfc2c5;
+	padding-bottom: 10px;
+}
+
+h2
+{
+	font-size: 1.5em;
+	margin-top: 24px;
+	margin-bottom: 12px;
+}
+
+h3
+{
+	font-size: 1.125em;
+	color: #005cb9;
+	margin-bottom: 6px;
+}
+
+
+h5	/* Added 14/10/14 (KS) */
+{
+	font-size: 0.9em;
+	font-style: italic;
+	font-weight: bold;
+	color: #00366e;
+	margin-bottom: 3px;
+}
+
+h6
+{
+	margin-left: 0;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	color: #5c5f63;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-weight: bold;
+}
+
+/* ============================================================================================= */
+/* LINKS */
+/* ============================================================================================= */
+
+a
+{
+	color: #3b73b9;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus
+{
+	color: #22436b;
+	text-decoration: underline;
+}
+
+a.Popup
+{
+	
+}
+
+/* Link styles add icons according to link destination - added 25/11/14 */
+
+a[href*='.htm']
+{
+	background-image: url('Shared/ico_link_sm.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+a[href*='.pdf']
+{
+	background-image: url('Shared/pdf_link_12x12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+a[href*='http']
+{
+	background-image: url('Shared/external_link_12x12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+
+
+/* ======================================================== */
+/* STYLES FOR ARTICLE STRUCTURE */
+/* ======================================================== */
+/* ======================================================================== */
+/* ===      HEADER     ==================================================== */
+/* ======================================================================== */
+
+p.sw_version
+{
+	margin-top: 2px;
+}
+
+div.header
+{
+	padding: 10px;
+	background-color: #e1e2e5;
+	padding-bottom: 4px;
+	max-height: 132px;
+	/* This should match the top margin of the main article div */
+	overflow: auto;
+}
+
+div.header h1
+{
+	margin-bottom: 6px;
+}
+
+/* ======================================================================== */
+/* ===      FOOTER     ==================================================== */
+/* ======================================================================== */
+
+div.footer
+{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	padding-left: 4px;
+	background-color: #5c5f63;
+	padding-right: 4px;
+}
+
+/* Updated sw_update, sw_copyright and sw_footer_title to use GE Inspira KS (9/10/14) */
+
+p.sw_update,
+p.sw_copyright,
+p.sw_footer_title
+{
+	color: #ffffff;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+}
+
+p.sw_update
+{
+	text-align: right;
+	margin-right: 10px;
+}
+
+p.sw_copyright
+{
+	margin-left: 10px;
+	text-align: left;
+}
+
+/* Added to accommodate article title in footer - KS 6/10/2014 */
+
+p.sw_footer_title
+{
+	margin-left: 10px;
+	text-align: left;
+	font-style: italic;
+	padding-right: 20px;
+}
+
+td p.sw_update,
+td p.sw_copyright,
+td p.sw_footer_title
+{
+	font-size: 1em;
+}
+
+a.sw_copyright
+{
+	color: #ffffff;
+	text-decoration: none;
+	background-image: none;
+	padding-left: 0px;
+}
+
+a.sw_copyright:hover,
+a.sw_copyright:focus,
+a.sw_copyright:link,
+a.sw_copyright:visited
+{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+/* ======================================================================== */
+/* ===      ARTICLE     ==================================================== */
+/* ======================================================================== */
+
+div.article
+{
+	background-color: #ffffff;
+	border-radius: 4px;
+	padding: 10px;
+	padding-bottom: 12px;
+	margin-bottom: 48px;
+	/* so that text isn't hidden behind the footer (KS 23/10/14)*/
+	padding-top: 6px;
+}
+
+/* ======================================================== */
+/* PARAGRAPH STYLES */
+/* ======================================================== */
+/* Basic paragraph */
+
+p
+{
+	margin: 10px;
+	font-size: 0.8em;
+	margin-left: 0;
+	line-height: 140%;
+}
+
+
+
+p.indent /* use after p.definition_term in lists */
+{
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 30px;
+}
+
+
+
+/* ============================================================================================= */
+/* Definition list */
+/* ============================================================================================= */
+/* Use this for imported definition_term, followed by p.indent */
+
+p.definition_term 
+{
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif; /* added 12/1/15 (KS) */
+	margin-left: 6px;
+	margin-bottom: 6px;
+}
+
+/* For new definition lists: */
+
+dl
+{
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+dt,
+dd
+{
+	line-height: 120%;
+}
+
+dt
+{
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;  /* added 12/1/15 (KS) */		
+	font-weight: bold;
+	font-size: 0.8em;
+	margin-left: 6px;
+	margin-bottom: 10px;
+}
+
+dd
+{
+	font-size: 0.8em;
+	margin-left: 24px;
+}
+
+dl dd
+{
+	margin-bottom: 10px;
+}
+
+/* ============================================================================================= */
+/* COMMENT - for temporary use only */
+/* ============================================================================================= */
+
+p.sw_comment
+{
+	text-align: left;
+	text-decoration: underline;
+	margin-bottom: 0pt;
+	color: #ff0000;
+}
+
+/* ============================================================================================= */
+/* PREFORMATTED TEXT */
+/* ============================================================================================= */
+
+pre
+{
+	font-family: Inconsolata, Consolas, monospace;
+	font-size: 0.8em;
+	color: #5c5f63;
+	background-color: #f7f8fa;
+	border: solid 1px #e1e2e5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 4px 9.5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 10px;
+	line-height: 150%;
+	max-height: 350px;
+	overflow: auto;
+}
+
+
+
+div.code	/*For chunks of code, not single lines*/
+{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	overflow: auto;
+	background-color: #f7f8fa;
+	border: solid 1px #e1e2e5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 10px;
+	max-height: 350px;
+	/* max-width: 95%; */
+}
+
+
+
+div.code pre
+{
+	border-width: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	padding: 0 9.5px;
+	margin: 0;
+	line-height: 150%;
+}
+
+/* Handle note styles inside code chunks by removing note borders */
+
+div.code p.Note,
+div.code div.Notes
+
+{
+	background-color: #f7f8fa;
+	padding: 0px 10px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	text-indent: 0px;
+	border: none;
+}
+
+/* For code chunks inside a table - updated 6/10/2014 (KS) */
+
+td div.code pre
+{
+	font-size: 1em;
+}
+
+/* ============================================================================================= */
+/* Lists using ul and ol elements */
+/* Updated 4/11/14 (Karen) - tweaking spacings                                                   */
+/* ============================================================================================= */
+
+ol,
+ul
+{
+	font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif;
+	font-size: 0.8em;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 0;
+	line-height: 120%;
+}
+
+ul
+{
+	list-style-type: disc;
+	margin-left: 22px;
+}
+
+ol
+{
+	list-style-type: decimal;
+	margin-left: 26px;
+}
+
+/* second-level ordered list uses lowercase letters */
+
+ol ol
+{
+	list-style-type: lower-alpha;
+	font-size: 1em;
+	margin-left: 24px;
+}
+
+ul ol
+{
+	list-style-type: lower-alpha;
+	font-size: 1em;
+	margin-left: 26px;
+}
+
+/* second-level unordered list uses diamond bullet */
+
+ol ul
+{
+	list-style-image: url('Shared/diamond.gif');
+	font-size: 1em;
+	margin-left: 18px;
+}
+
+ul ul
+{
+	list-style-image: url('Shared/diamond.gif');
+	font-size: 1em;
+	margin-left: 20px;
+}
+
+/* third-level ordered list uses roman numerals (lowercase) */
+
+ol ol ol,
+ol ul ol,
+ul ol ol,
+ul ul ol
+{
+	list-style-image: none;
+	list-style-type: lower-roman;
+	font-size: 1em;
+	margin-left: 24px;
+}
+
+/* third-level unordered list uses circle bullet */
+
+ol ol ul,
+ol ul ul,
+ul ol ul,
+ul ul ul
+{
+	list-style-image: none;
+	list-style-type: circle;
+	font-size: 1em;
+	margin-left: 18px;
+}
+
+li
+{
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding-left: 4px;
+	line-height: 120%;
+}
+
+ul li
+{
+	padding-left: 6px;
+}
+
+li p
+{
+	font-size: 1em;
+}
+
+li img.figure
+{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+/* This is the 'indent' paragraph for lists */
+
+li.continuation
+{
+	margin-top: 6px;
+	margin-bottom: 4px;
+	line-height: 120%;
+	display: block;
+	list-style-type: none;
+}
+
+li.code	/*Use a single para for mult-line code, i.e Shift+Return to separate lines */
+{
+	line-height: 120%;
+	display: block;
+	list-style-type: none;
+	font-family: Inconsolata, Consolas, monospace;
+	color: #5c5f63;
+	border: solid 1px #e1e2e5;
+	border-radius: 4px;
+	margin-top: 4px;
+	margin-right: 10px;
+	background-color: #f7f8fa;
+	margin-bottom: 2px;
+	margin-left: 4px;
+	padding: 6px;
+}
+
+li div.code pre	/* correction to font size and position if div.code is used inside a list */
+{
+	font-size: 1em;
+	margin-left: 0px;
+}
+
+
+/* Use for a list that doesn't need bullets, e.g. links that use a background image */
+
+ul.nobullet
+{
+	list-style-type: none;
+}
+
+/* Multicolumn bullet lists */
+
+ul.multicol2,
+ul.multicol3,
+ul.multicol4
+{
+	-webkit-column-gap: 48px;
+	-moz-column-gap: 48px;
+	column-gap: 48px;
+	-webkit-column-rule: 1px dotted black;
+	-moz-column-rule: 1px dotted black;
+	column-rule: 1px dotted black;
+}
+
+ul.multicol2
+{
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+}
+
+ul.multicol3
+{
+	-webkit-column-count: 3;
+	-moz-column-count: 3;
+	column-count: 3;
+}
+
+ul.multicol4
+{
+	-webkit-column-count: 4;
+	-moz-column-count: 4;
+	column-count: 4;
+}
+
+/* Added 29/10/14 (Karen) If bullets are used in a definition description, or p.indent... */
+
+p.indent + ul,
+dd + ul
+{
+	list-style-image: url('Shared/diamond.gif');
+	margin-left: 42px;
+	margin-top: 0;
+}
+
+/* ============================================================================================= */
+/* Graphics */
+/* ============================================================================================= */
+
+img	/*primarily icons and inline images*/
+{
+	border: none;
+	vertical-align: middle;
+	padding-left: 2px;
+	padding-right: 1px;
+	display: inline-block;
+}
+
+img.figure	/*Screenshots and examples*/
+{
+	border: none;
+	padding-left: 1px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-left: 12px;
+	display: block;
+}
+
+p.figure_title
+{
+	font-style: italic;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+	margin-left: 12px;
+	margin-bottom: 10px;
+}
+
+div.ImagesFloatLeft
+{
+	clear: both;
+	float: left;
+	margin-right: 12px;
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-right: 12px;
+	border: solid 1px #bfc2c5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #f7f8fa;
+}
+
+div.ImagesFloatRight
+{
+	clear: both;
+	float: right;
+	margin-left: 12px;
+	margin-right: 24px;
+	padding-top: 10px;
+	padding-right: 12px;
+	border: solid 1px #bfc2c5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #f7f8fa;
+}
+
+div.ImagesFloatLeft p,
+div.ImagesFloatRight p
+{
+	margin: 6px;
+	margin-top: 0;
+}
+
+div.ImagesFloatLeft p.figure_title,
+div.ImagesFloatRight p.figure_title
+{
+	margin-top: 0;
+	margin-left: 16px;
+	margin-right: 6px;
+	margin-bottom: 6px;
+}
+
+/* ========================================================= */
+/* Cross-references */
+/* ========================================================= */
+/* Updated 25/11/14 to add icon for links outside of article */
+
+MadCap|xref
+{
+	mc-format: '{paratext}';
+	font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif;
+	line-height: 140%;
+	font-size: 1em;
+	color: #3b73b9;
+	text-decoration: none;
+	background-image: url('Shared/ico_link_sm.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+MadCap|xref:hover,
+MadCap|xref:focus
+{
+	color: #22436b;
+	text-decoration: underline;
+}
+
+/* Updated 25/11/14 to remove icon for local links (within article) */
+
+MadCap|xref.local
+{
+	background-image: none;
+	padding-left: 0px;
+}
+
+MadCap|xref.step_number
+{
+	mc-format: '{paranumonly}';
+}
+
+MadCap|xref.figure_title
+{
+	mc-format: 'this figure';
+}
+
+/* ============================================================================================= */
+/* Expanding sections */
+/* ============================================================================================= */
+/* Drop-downs */
+
+MadCap|dropDown
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	mc-closed-image: url('Shared/plus.png');
+	mc-open-image: url('Shared/minus.png');
+}
+
+MadCap|dropDownHead	/* change these margins if we want less space in a group of drop-downs */
+{
+	margin-top: 20px;
+	margin-bottom: 0px;
+}
+
+MadCap|dropDownHotspot	/* This is styled like 'h3' in terms of font size etc. */
+{
+	cursor: hand;
+	text-decoration: none;
+	font-weight: normal;
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+	font-size: 1.125em;
+	color: #313337;
+}
+
+MadCap|dropDownHotspot:hover
+{
+	color: #005cb9;
+}
+
+MadCap|dropDownHotspot:focus
+{
+	color: #005cb9;
+}
+
+MadCap|dropDownBody
+{
+	border-bottom: solid 1px #00366e;
+	padding-bottom: 10px;
+	margin-top: 0px;
+}
+
+/* Use this to avoid double lines at the end of a nested section */
+
+MadCap|dropDownBody.final
+{
+	border-bottom: solid 0px #005cb9;
+	padding-bottom: 0px;
+}
+
+/* Togglers */
+
+MadCap|toggler
+{
+	color: #000000;
+	mc-closed-image: none;
+	mc-image-spacing: 0px;
+	mc-open-image: none;
+	background-color: #edeeef;
+	padding: 1px 0;
+}
+
+MadCap|toggler:hover
+{
+	background-color: #e1e2e5;
+}
+
+
+
+MadCap|toggler.Example
+{
+	color: #5c5f63;
+	mc-closed-image: none;
+	mc-image-spacing: 0px;
+	mc-open-image: none;
+	padding: 1px 0;
+	background-color: #e1e2e5;
+}
+
+MadCap|toggler.Example:hover
+{
+	cursor: hand;
+	background-color: #edeeef;
+}
+
+MadCap|toggler.Example:focus
+{
+	background-color: #edeeef;
+}
+
+/* End of Example toggler */
+
+div.textExpand
+{
+	margin-top: 12px;
+	border-left: solid 1px #bfc2c5;
+	padding: 12px;
+	padding-top: 6px;
+	background-color: #f7f8fa;
+}
+
+/* Updated 8/10/14 (Karen). Added auto-scroll for large pictures */
+
+div.figureExpand
+{
+	margin-top: 12px;
+	border-left: solid 1px #bfc2c5;
+	padding: 6px;
+	padding-top: 12px;
+	background-color: #f7f8fa;
+	overflow: auto;
+}
+
+/* Added 15/10/14 (Karen) */
+
+div.figureExpand img.figure
+{
+	margin-left: 4px;
+}
+
+div.figureExpand p.figure_title
+{
+	margin-left: 6px;
+}
+
+/* ========================================================================= */
+/* TABLES */
+/* ========================================================================= */
+
+caption
+{
+	margin: 10px 0;
+	text-align: right;
+	font-size: 0.8em;
+	font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* Note that the following should be set here and NOT in the table styles. */
+/* Table styles will overwrite, so leave font size unset in table style sheet. */
+
+th,
+td
+{
+	font-size: 0.8em;
+}
+
+td p
+{
+	font-size: 1em;
+	margin: 0;
+}
+
+li th,
+li td
+{
+	font-size: 1em;
+}
+
+li table
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+td ul,
+td ol
+{
+	font-size: 1em;
+}
+
+/* For a table within a table - but not advised! KS 6/10/2014 */
+
+td table tbody tr td
+{
+	font-family: Tahoma, 'Trebuchet MS', Arial, sans-serif;
+	font-size: 1em;
+}
+
+/* Fix size of h6 inside a table - KS 17/11/14 */
+
+td h6
+{
+	font-size: 1em;
+}
+
+/* =========================================================================== */
+/* Custom 'note styles'  Last updated 3/11/2014 (Karen) */
+/* =========================================================================== */
+
+p.Note
+{
+	background-color: #f7f8fa;
+	margin-right: 10px;
+	padding: 6px 10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-indent: 0px;
+	border-bottom-color: #bfc2c5;
+	border: solid 1px #bfc2c5;
+}
+
+p.Note:before
+{
+	content: 'Note';
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+	padding-right: 10px;
+	padding-left: 0px;
+}
+
+li p.Note
+{
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+div.Notes
+{
+	margin-top: 12px;
+	margin-right: 10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 10px;
+	background-color: #f7f8fa;
+	border: solid 1px #bfc2c5;
+}
+
+div.Notes:before
+{
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+	content: 'Notes';
+}
+
+/* Important notes */
+
+p.NoteImportant
+{
+	padding: 6px 10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: solid 1px #dd1144;
+	background-color: #f7f8fa;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+p.NoteImportant:before
+{
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+	padding-right: 10px;
+	padding-left: 0px;
+	content: 'Important';
+	text-transform: uppercase;
+	color: #dd1144;
+	letter-spacing: 0.5px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+div.NotesImportant
+{
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 10px;
+	background-color: #f7f8fa;
+	border: solid 1px #dd1144;
+}
+
+div.NotesImportant:before
+{
+	font-size: 0.8em;
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+	text-transform: uppercase;
+	content: 'Important';
+	letter-spacing: 0.5px;
+	color: #dd1144;
+}
+
+td p.Note,
+td p.NoteImportant
+{
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-top: 4px;
+}
+
+/* Tips */
+
+p.Tip
+{
+	
+}
+
+p.Tip:before
+{
+	content: 'Tip';
+	color: #ffffff;
+	padding: 2px 6px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	letter-spacing: 0.5px;
+	border: solid 1px #3b73b9;
+	background-color: #3b73b9;
+}
+
+div.Tips
+{
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding-bottom: 10px;
+	background-color: #f7f8fa;
+	border: solid 1px #3b73b9;
+}
+
+div.Tips:before
+{
+	font-size: 0.8em;
+	content: 'Tips';
+	color: #ffffff;
+	padding: 2px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	-webkit-border-bottom-right-radius: 4px;
+	-moz-border-bottom-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	letter-spacing: 0.5px;
+	border: solid 1px #3b73b9;
+	padding-right: 6px;
+	padding-left: 6px;
+	padding-bottom: 4px;
+	background-color: #3b73b9;
+}
+
+div.Tips p,
+div.Tips ul,
+div.Tips ol
+{
+	padding-left: 10px;
+}
+
+/* ~~~~~~~~~~~~~ CORRECTIONS TO SPACING BEFORE AND AFTER HEADINGS ~~~~~~~~~~~~~~~ */
+/* Spacing BEFORE h5. Updated 3/11/14 (KS)*/
+
+h3 + h5,
+p + h5
+{
+	margin-top: 0px;
+}
+
+ul + h5,
+ol + h5
+{
+	margin-top: 12px;
+}
+
+/* Spacing AFTER h3 and h5. Updated 3/11/14 (KS)*/
+
+h3 + p,
+h5 + p
+{
+	margin-top: 0px;
+}
+
+h5 + ul,
+h5 + ol
+{
+	margin-top: 0px;
+}
+
+/* =================================================================== */
+/* SLIDESHOWS  - testing - TO BE UPDATED */
+/* =================================================================== */
+
+MadCap|slide
+{
+	text-align: left;
+	border: solid 1px #4682b4;
+	padding: 12px;
+	padding-top: 0px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+MadCap|slideshowBullet
+{
+	background-color: #3b73b9;
+}
+
+MadCap|slideshowBullet.active
+{
+	background-color: #1a90f0;
+}
+
+MadCap|slideshowBullet:hover
+{
+	background-color: #1a90f9;
+}
+
+MadCap|slideshowBullet.active:hover
+{
+	background-color: #005cb9;
+}
+
+/* ======================================================================= */
+
+/*                                        CHARACTER STYLES 
+===========================================================================*/
+
+/* Modified 4/11/14 (KS)  */
+
+b,
+strong
+{
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+}
+
+pre b,
+li.code b
+{
+	font-family: Inconsolata, Consolas, monospace;
+}
+
+/* Added 1/12/14 (KS) */
+
+h1 b,
+h2 b,
+h3 b
+{
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* Modified 15/10/14 (KS) */
+
+i,
+em
+{
+	font-style: italic;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+}
+
+pre i,
+li.code i
+{
+	font-family: Inconsolata, Consolas, monospace;
+}
+
+/* Added 1/12/14 (KS) */
+
+h1 i,
+h2 i,
+h3 i
+{
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* Modified 15/10/14 (KS) */
+
+b.bold_italic
+{
+	font-style: italic;
+	font-weight: bold;
+}
+
+pre b.bold_italic,
+li.code b.bold_italic
+{
+	font-family: Inconsolata, Consolas, monospace;
+}
+
+/* Updated 9/10/2014 (Karen). Reduced the padding to avoid clipping problems when */
+/* the code element appears in consecutive lines in a paragraph. */
+
+code,
+kbd
+{
+	letter-spacing: 0em;
+	text-decoration: none;
+	color: #dd1144;
+	background-color: #f7f8fa;
+	white-space: nowrap;
+	border-color: #e1e2e5;
+	border-style: solid;
+	border-width: 1px;
+	padding: 1px 2px;
+	border-radius: 4px;
+	font-family: Inconsolata, Consolas, monospace;
+}
+
+code.bold
+{
+	font-weight: bold;
+}
+
+code.italic
+{
+	font-style: italic;
+}
+
+small
+{
+	font-size: 85%;
+}
+
+cite
+{
+	font-style: normal;
+}
+
+/* To be reviewed */
+
+sup
+{
+	font-size: 75%;
+	line-height: 0px;
+	top: -50%;
+	position: relative;
+	vertical-align: super;
+}
+
+/* To be reviewed */
+
+sub
+{
+	font-size: 75%;
+	line-height: 0px;
+	position: relative;
+	bottom: -25%;
+}
+
+/* =================================================================== */
+/* PRINT STYLES - Last updated 8/1/15 (KS) */
+/* These are the styles for printing an online article from the browser - PDFs will have a separate style sheet */
+/* =================================================================== */
+
+@media print
+{
+	body
+	{
+		font-size: 10pt;
+		line-height: 12pt;
+		background-color: #fff;
+	}
+
+	/* Headings */
+
+	h1,
+	h2,
+	h3,
+	h5,
+	h6
+	{
+		page-break-after: avoid;
+	}
+
+	h1
+	{
+		font-size: 24pt;
+		margin-bottom: 18pt;
+		border-bottom: solid 1pt #000;
+	}
+
+	h2
+	{
+		font-size: 18pt;
+		margin-top: 18pt;
+		margin-bottom: 9pt;
+	}
+
+	h3
+	{
+		font-size: 14pt;
+		color: #000;
+		margin-bottom: 6pt;
+	}
+
+	h5
+	{
+		font-size: 10pt;
+		color: #000;
+		margin-bottom: 2pt;
+	}
+
+	h6
+	{
+		margin-bottom: 8pt;
+		margin-top: 16pt;
+		font-size: 10pt;
+		letter-spacing: 0;
+	}
+
+	/* Links */
+
+	a
+	{
+		background-image: none !important;
+		padding-left: 0 !important;
+	}
+
+	a:after[href*='http']
+	{
+		content: " (" attr(href) ") ";
+	}
+
+	a:after[href*='pdf']
+	{
+		content: " (PDF) ";
+	}
+
+	/* Structure */
+
+	p.sw_version
+	{
+		margin-top: 1pt;
+		color: #5c5f63;
+	}
+
+	div.header
+	{
+		padding: 8pt;
+		background: none;
+		padding-bottom: 4pt;
+		max-height: none;
+	}
+
+	div.header h1
+	{
+		margin-bottom: 4pt;
+	}
+
+	div.footer
+	{
+		display: none;
+	}
+
+	p.sw_update,
+	p.sw_copyright
+	{
+		display: none;
+	}
+
+	p.sw_update
+	{
+		display: none;
+	}
+
+	p.sw_footer_title
+	{
+		display: none;
+	}
+
+	div.article
+	{
+		padding: 6pt;
+		margin-bottom: 0;
+	}
+
+	/* Paragraph styles */
+
+	p
+	{
+		margin-bottom: 6pt;
+		margin-top: 4pt;
+	}
+
+	p.indent
+	{
+		margin-top: 3pt;
+		margin-bottom: 3pt;
+		margin-left: 24pt;
+	}
+
+
+
+	/* Definition list */
+
+	p.definition_term
+	{
+		margin-left: 5pt;
+		margin-bottom: 5pt;
+	}
+
+	dl
+	{
+		margin-bottom: 18pt;
+		margin-top: 18pt;
+	}
+
+	dt
+	{
+		margin-left: 5pt;
+		margin-bottom: 9pt;
+	}
+
+	dd
+	{
+		margin-left: 21pt;
+	}
+
+	dl dd
+	{
+		margin-bottom: 9pt;
+	}
+
+	/* Preformatted text */
+
+	pre
+	{
+		border: solid 1pt #e1e2e5;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		padding: 4pt 8pt;
+		margin: 0;
+		margin-right: 9pt;
+		max-height: none;
+		page-break-inside: avoid;
+		white-space: pre-wrap;
+	}
+
+
+
+	div.code
+	{
+		padding-top: 4pt;
+		padding-bottom: 4pt;
+		background-color: #f7f8fa;
+		border: solid 1pt #e1e2e5;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		margin: 0;
+		margin-right: 9pt;
+		max-height: none;
+		page-break-inside: avoid;
+	}
+
+
+
+	div.code pre
+	{
+		padding: 0 8pt;
+	}
+
+	/* Lists */
+
+	ol,
+	ul
+	{
+		/* font-size: 9pt;
+		line-height: 11pt; */
+		margin-top: 5pt;
+		margin-bottom: 5pt;
+	}
+
+	ul
+	{
+		margin-left: 18pt;
+	}
+
+	ol
+	{
+		margin-left: 22pt;
+	}
+
+	ol ol
+	{
+		margin-left: 21pt;
+		page-break-before: avoid;
+	}
+
+	ul ol
+	{
+		margin-left: 21pt;
+		page-break-before: avoid;
+	}
+
+	ol ul
+	{
+		margin-left: 16pt;
+		page-break-before: avoid;
+	}
+
+	ul ul
+	{
+		margin-left: 16pt;
+		page-break-before: avoid;
+	}
+
+	ol ol ul,
+	ol ul ul,
+	ul ol ul,
+	ul ul ul
+	{
+		margin-left: 16pt;
+		page-break-before: avoid;
+	}
+
+	li
+	{
+		margin-top: 4pt;
+		margin-bottom: 4pt;
+		padding-left: 4pt;
+	}
+
+	ul li
+	{
+		padding-left: 5pt;
+	}
+
+	li img.figure
+	{
+		margin-top: 18pt;
+		margin-bottom: 9pt;
+	}
+
+	li.continuation
+	{
+		margin-top: 5pt;
+		margin-bottom: 4pt;
+	}
+
+	li.code
+	{
+		border: solid 1pt #e1e2e5;
+		border-radius: 4pt;
+		margin-top: 4pt;
+		margin-right: 9pt;
+		margin-bottom: 2pt;
+		margin-left: 4pt;
+		padding: 5pt;
+	}
+
+	ul.nobullet	/* reinstating bullet as we won't print background images */
+	{
+		list-style-type: disc;
+		margin-left: 18pt;
+	}
+
+	ul.multicol2,
+	ul.multicol3,
+	ul.multicol4
+	{
+		-webkit-column-gap: 42pt;
+		-moz-column-gap: 42pt;
+		column-gap: 42pt;
+		-webkit-column-rule: 1pt dotted black;
+		-moz-column-rule: 1pt dotted black;
+		column-rule: 1pt dotted black;
+	}
+
+	p.indent + ul,
+	dd + ul
+	{
+		margin-left: 36pt;
+	}
+
+	/* Graphics */
+
+	img	/*primarily icons and inline images*/
+	{
+		padding-left: 2pt;
+		padding-right: 1pt;
+	}
+
+	img.figure
+	{
+		padding-left: 1pt;
+		padding-top: 5pt;
+		padding-bottom: 5pt;
+		margin-left: 10pt;
+	}
+
+	div.ImagesFloatLeft
+	{
+		margin-right: 10pt;
+		margin-top: 9pt;
+		padding-top: 9pt;
+		padding-right: 10pt;
+		border: solid 1pt #bfc2c5;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+	}
+
+	div.ImagesFloatLeft p,
+	div.ImagesFloatRight p
+	{
+		margin-top: 0;
+		margin-left: 5pt;
+		margin-right: 5pt;
+		margin-bottom: 5pt;
+	}
+
+	div.ImagesFloatLeft p.figure_title,
+	div.ImagesFloatRight p.figure_title
+	{
+		margin-top: 0;
+		margin-left: 14pt;
+		margin-right: 5pt;
+		margin-bottom: 5pt;
+	}
+
+	/* Cross-references */
+
+	MadCap|xref
+	{
+		background: none !important;
+		padding-left: 0 !important;
+	}
+
+	/* Expanding sections */
+	/* Drop-downs */
+
+	MadCap|dropDown
+	{
+		margin-top: 9pt;
+		margin-bottom: 9pt;
+	}
+
+	MadCap|dropDownHead	/* change these margins if we want less space in a group of drop-downs */
+	{
+		margin-top: 18pt;
+		margin-bottom: 0;
+	}
+
+	MadCap|dropDownHotspot	/* This is styled like 'h3' in terms of font size etc. */
+	{
+		color: #000000;
+		font-size: 14pt;
+	}
+
+	MadCap|dropDownBody
+	{
+		border-bottom: solid 1pt #00366e;
+		padding-bottom: 9pt;
+		margin-top: 0;
+	}
+
+	.MCDropDownHotSpot
+	{
+		font-size: 14pt !important;
+	}
+
+	/* Togglers */
+
+	MadCap|toggler
+	{
+		mc-image-spacing: 0;
+		padding-right: 0;
+		padding-left: 0;
+		padding-bottom: 1pt;
+		padding-top: 1pt;
+	}
+
+	MadCap|toggler.Example
+	{
+		mc-image-spacing: 0;
+		padding-right: 0;
+		padding-left: 0;
+		padding-bottom: 1pt;
+		padding-top: 1pt;
+	}
+
+	div.textExpand
+	{
+		margin-top: 10pt;
+		border-left: solid 1pt #bfc2c5;
+		padding: 10pt;
+		padding-top: 5pt;
+	}
+
+	div.figureExpand
+	{
+		margin-top: 10pt;
+		border-left: solid 1pt #bfc2c5;
+		padding: 5pt;
+		padding-top: 10pt;
+	}
+
+	div.figureExpand img.figure
+	{
+		margin-left: 3pt;
+	}
+
+	div.figureExpand p.figure_title
+	{
+		margin-left: 5pt;
+	}
+
+	/* Tables */
+
+	caption
+	{
+		margin: 9pt 0;
+	}
+
+	/* Note that the following should be set here and NOT in the table styles. */
+	/* Table styles will overwrite, so leave font size unset in table style sheet. */
+
+
+	thead tr td,
+	thead tr td p,
+	th
+	{
+		color: #000 !important;
+		font-weight: bold !important;
+	}
+
+	li table
+	{
+		margin-top: 9pt;
+		margin-bottom: 9pt;
+	}
+
+
+	/* For a table within a table - but not advised! KS 6/10/2014 */
+
+	td table tbody tr td
+	{
+		/* font-size: 9pt; */
+	}
+
+	/* Fix size of h6 inside a table - KS 17/11/14 */
+
+	td h6
+	{
+		font-size: 10pt;
+	}
+
+	/* Special note formats */
+
+	p.Note
+	{
+		margin-right: 9pt;
+		padding: 5pt 9pt;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		border: solid 1pt #bfc2c5;
+	}
+
+	p.Note:before
+	{
+		padding-right: 9pt;
+	}
+
+	li p.Note
+	{
+		padding-top: 5pt;
+		padding-bottom: 5pt;
+	}
+
+	div.code p.Note,
+	div.code div.Notes
+	{
+		padding: 0 9pt;
+	}
+
+	div.Notes
+	{
+		margin-top: 10pt;
+		margin-right: 9pt;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		padding: 9pt;
+		padding-top: 5pt;
+	}
+
+	p.NoteImportant
+	{
+		padding: 5pt 9pt;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		margin-top: 9pt;
+		margin-right: 9pt;
+	}
+
+	p.NoteImportant:before
+	{
+		padding-right: 9pt;
+		padding-left: 0;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+	}
+
+	div.NotesImportant
+	{
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		padding: 9pt;
+		padding-top: 5pt;
+		border: solid 1pt #dd1144;
+	}
+
+	div.NotesImportant:before
+	{
+		/* font-size: 9pt; */
+	}
+
+	td p.Note,
+	td p.NoteImportant
+	{
+		padding-top: 5pt;
+		padding-bottom: 5pt;
+		margin-top: 4pt;
+	}
+
+	/* Tips */
+
+	p.Tip
+	{
+		margin-right: 9pt;
+		padding: 5pt 9pt;
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		text-indent: 0pt;
+		border: solid 1pt #3b73b9;
+	}
+
+	p.Tip:before
+	{
+		content: 'Tip';
+		color: #000;
+		border: none;
+		background: none;
+		font-weight: bold;
+		font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+		padding-right: 9pt;
+		padding-left: 0;
+	}
+
+	div.Tips
+	{
+		-webkit-border-radius: 4pt;
+		-moz-border-radius: 4pt;
+		border-radius: 4pt;
+		padding-top: 5pt;
+		padding-bottom: 9pt;
+		border: solid 1pt #3b73b9;
+	}
+
+	div.Tips:before
+	{
+		content: 'Tips';
+		color: #000;
+		font-weight: bold;
+		font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+		padding: 3pt;
+		border: none;
+		padding-right: 5pt;
+		padding-left: 9pt;
+		padding-bottom: 4pt;
+		background-color: transparent;
+	}
+
+	div.Tips p,
+	div.Tips ul,
+	div.Tips ol
+	{
+		padding-left: 9pt;
+	}
+
+	/* Character styles */
+
+	code,
+	kbd
+	{
+		border: none;
+		padding: 0.5pt 2pt;
+	}
+
+	code.bold
+	{
+		font-weight: bold;
+	}
+
+	code.italic
+	{
+		font-style: italic;
+	}
+}
+
