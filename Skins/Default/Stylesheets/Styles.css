@@ -112,13 +112,13 @@ body
 	position: absolute;
 	top: 50%;
 	margin-left: 20px;
-	background:  url('Images/LogoIM_6.png') no-repeat center center;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/LogoIM_6.png') no-repeat center center;
+	background:  url('Images/LogoIM.png') no-repeat center center;
+	-pie-background:  url('Skins/Default/Stylesheets/Images/LogoIM.png') no-repeat center center;
 	background-repeat: no-repeat;
 	background-position: center center;
 	display: block;
 	alt-text: Logo;
-	width: 340px;
+	width: 580px;
 	height: 32px;
 	margin-top: -16px;
 }
@@ -1664,7 +1664,7 @@ a.activityText
 
 #header .logo > img
 {
-	width: 340px;
+	width: 580px;
 	height: 32px;
 }
 

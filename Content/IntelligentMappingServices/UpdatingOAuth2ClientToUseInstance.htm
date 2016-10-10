@@ -52,7 +52,7 @@
                             </p>
                         </td>
                         <td>
-                            <p class="sw_update">Last update: 31st May</p>
+                            <p class="sw_update">Last update: 28th September 2016</p>
                         </td>
                     </tr>
                 </tbody>
@@ -65,7 +65,8 @@
             <h3>Procedure</h3>
             <ol>
                 <li value="1">To enable applications to access the Intelligent Mapping or Dynamic Mapping service, your JSON Web Token (JWT) must contain the following scope:</li>
-                <li class="code">smallworld.zones.&lt;service_instance_guid&gt;.user</li>
+                <li class="code">&lt;service&gt;.zones.&lt;service_instance_guid&gt;.user</li>
+                <li class="continuation">Where <code>&lt;service&gt;</code> is <i>intelligent-mapping</i> or <i>dynamic-mapping</i>.</li>
                 <li class="continuation">
                     <p class="Note">The OAuth2 scope is created when you set up the service in Predix.</p>
                 </li>
@@ -85,9 +86,9 @@
                 <ul>
                     <li value="1">The client_id and client_secret are now populated with your choices.</li>
                     <li value="2">For "scope", in <code>["uaa.none","openid"]</code>, add a comma after "openid" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example:</li>
-                    <li class="code">["uaa.none","openid","smallworld.zones. 197a9395-b047-47df-8247-ae6d8db987f4.user"] </li>
+                    <li class="code">["uaa.none","openid","intelligent-mapping.zones. 197a9395-b047-47df-8247-ae6d8db987f4.user"] </li>
                     <li value="3">For "authorities", in <code>["openid","uaa.none","uaa.resource"]</code>, add a comma after "uaa.resource" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example</li>
-                    <li class="code">["openid","uaa.none","uaa.resource"," smallworld.zones. 197a9395-b047-47df-8247-ae6d8db987f4.user"]</li>
+                    <li class="code">["openid","uaa.none","uaa.resource"," intelligent-mapping.zones. 197a9395-b047-47df-8247-ae6d8db987f4.user"]</li>
                 </ul>
                 <li class="continuation">
                     <p class="Note">Make sure the OAuth2 scope is added when creating the Client ID. This is obtained from the VCAP_SERVICES environmental variable of the service you created.</p>
