@@ -1,0 +1,419 @@
+swagger: '2.0'
+info:
+  title: Dynamic Mapping
+  description: Dynamic Mapping services for geospatial data management and viewing
+  version: 0.0.1
+schemes:
+  - https
+produces:
+  - application/json
+parameters:
+  zoneId:
+    name: predix-zone-id
+    description: |
+      The Predix zone identifier. This is the instanceId value specified in the
+      VCAP-SERVICES environment variable.
+    in: header
+    pattern: >-
+      ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+    required: true
+    type: string
+    format: uuid
+  subtenant:
+    name: x-subtenant-id
+    description: The customer identifier.
+    in: header
+    required: true
+    type: string
+    maxLength: 50
+  collectionName:
+    name: collectionName
+    description: Name of asset collection.
+    in: path
+    required: true
+    type: string
+  assetId:
+    name: assetId
+    description: Asset identifier.
+    in: path
+    required: true
+    type: string
+    minLength: 1
+  queryType:
+    name: type
+    description: The type of the query for asset locations.
+    in: query
+    required: true
+    type: string
+    enum:
+      - latest
+      - timeperiod
+      - bbox
+securityDefinitions:
+  oauth:
+    type: oauth2
+    authorizationUrl: $UAA_URL
+    flow: implicit
+paths:
+  /v1/collections:
+    get:
+      summary: List all asset collections for a customer
+      description: |
+        Returns an array containing the names of all asset collections for the
+        specified customer.
+      tags:
+        - Collections
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+      responses:
+        '200':
+          x-predix-response: default
+          description: >-
+            Operation was a success. Response is an object containing an array
+            of collection names.
+          schema:
+            $ref: '#/definitions/CollectionNames'
+        default:
+          description: Unexpected error.
+  '/v1/collections/{collectionName}':
+    get:
+      summary: Return all asset ids for a collection
+      description: >
+        Returns the collection name and a list of ids of the assets that belong
+        to
+
+        the collection.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+      tags:
+        - Collections
+      responses:
+        '200':
+          x-predix-response: default
+          description: >
+            Operation was a success. Response is an object containing the
+            collection name and
+
+            an array of asset identifiers.
+          schema:
+            $ref: '#/definitions/CollectionObject'
+        '404':
+          x-predix-response: notfound
+          description: Collection could not be found.
+        default:
+          x-predix-response: error
+          description: Unexpected error.
+    delete:
+      summary: Delete a collection
+      description: >
+        Delete the asset collection specified by the collection name. Any
+        associated asset and asset location data
+
+        are also deleted
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+      tags:
+        - Collections
+      responses:
+        '200':
+          x-predix-response: default
+          description: >-
+            Operation was a success, collection has been deleted (empty
+            response).
+        '404':
+          x-predix-response: notfound
+          description: Specified collection does not exist.
+        default:
+          description: Unexpected error.
+  '/v1/collections/{collectionName}/assets/{assetId}':
+    put:
+      summary: Add an asset location into a collection.
+      description: >
+        Insert a location entry into the named collection for the given asset
+        identifier and timestamp. In addition to
+
+        adding the new asset location, the request also controls the retention
+        of the location history that is
+
+        stored for the given asset in the given collection.
+
+          - If the mandatory property retain_history is set to false then all existing location history for the
+          given asset is removed before the new location is added.
+
+          - If the retain_history property is set to true and the optional property purge_history_before is not set
+          then the new location is added to the existing set of locations for the given asset.
+
+          - If retain_history is set to true and the optional property purge_history_before is set then any existing
+          locations for the given asset that have a timestamp that is older than the supplied purge_history_before
+          timestamp are first deleted. Next the new location is added to the set of locations that remain.
+
+          - If the set of location entries for the given asset (after any possible removals) contains a location entry
+           with the same timestamp as the new location then the location of that entry is updated rather than a new
+           location entry being added.
+
+          - Note the new entry is always added or used to update an existing entry.
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/assetId'
+        - name: body
+          description: >
+            An object containing the location of the asset at a given timestamp,
+            together with additional properties to control
+
+            the retention of any existing asset location history.
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/addAssetLocationBody'
+      tags:
+        - Collections
+      security:
+        - oauth: []
+      responses:
+        '204':
+          x-predix-response: default
+          description: >
+            Operation was a success. The feature was inserted or updated if
+            entry for the asset identifier
+
+            and timestamp already existed. Response is empty.
+        '400':
+          x-predix-response: badrequest
+          description: |
+            Bad request. Asset location or timestamp not provided or invalid.
+        '404':
+          x-predix-response: notfound
+          description: Named collection not found.
+        default:
+          description: Unexpected error.
+    delete:
+      summary: Delete an asset and its location data
+      description: >
+        Delete the asset specified by the collection name. Any location data
+        associated with the asset are also deleted.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/assetId'
+      tags:
+        - Collections
+      responses:
+        '200':
+          x-predix-response: default
+          description: 'Operation was a success, asset has been deleted (empty response).'
+        '404':
+          x-predix-response: notfound
+          description: Specified asset does not exist.
+        default:
+          description: Unexpected error.
+    get:
+      summary: Return the latest location data for an asset
+      description: >
+        Returns the latest location entry for the given asset. The timestamp and
+        location data for the
+
+        given entry is included in the response.
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/assetId'
+      tags:
+        - Collections
+      security:
+        - oauth: []
+      responses:
+        '200':
+          x-predix-response: default
+          description: >-
+            Operation was a success. Response is an object containing the
+            timestamp and location of the most recent location entry.
+          schema:
+            $ref: '#/definitions/LocationObject'
+        '404':
+          x-predix-response: notfound
+          description: >-
+            Collection could not be found, or no location entries could be found
+            for the asset.
+        default:
+          x-predix-response: error
+          description: Unexpected error.
+  '/v1/collections/{collectionName}/assets/{assetId}/query':
+    post:
+      summary: >-
+        Return locations for an asset by query condition for given customer id
+        and collection name.
+      description: >
+        Returns the locations for an asset by three types of query for a given
+        customer id and collection name.
+
+        The returned locations are in descending order of time.
+
+        Three types of query:
+
+        1. type=latest: The latest n locations will be returned.
+
+        2. type=timeperiod: Locations within a time period will be returned.
+
+        3. type=bbox: Locations within a time period and a spatial bounding box
+        will be returned.
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/assetId'
+        - $ref: '#/parameters/queryType'
+        - name: body
+          description: The parameters for the query for asset locations.
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/QueryObject'
+      tags:
+        - Collections
+      security:
+        - oauth: []
+      responses:
+        '200':
+          x-predix-response: default
+          description: >
+            Operation was a success. Response is an object containing a list of
+            location entries. Each entry
+
+            includes the location data and timestamp. An empty array is returned
+            if no location is found.
+          schema:
+            $ref: '#/definitions/LocationObjects'
+        '400':
+          x-predix-response: badrequest
+          description: >
+            Bad request. The query type or the parameters for the query type are
+            invalid.
+        default:
+          x-predix-response: error
+          description: Unexpected error.
+definitions:
+  BoundingBox:
+    description: An array of 4 numbers representing xmin ymin xmax ymax of a bounding box.
+    type: object
+    required:
+      - left
+      - right
+      - top
+      - bottom
+    properties:
+      left:
+        type: number
+      right:
+        type: number
+      top:
+        type: number
+      bottom:
+        type: number
+  Location:
+    description: >-
+      An array of numbers representing x y z coordinates of a location. z is
+      optional.
+    type: array
+    minItems: 2
+    maxItems: 3
+    items:
+      type: number
+  Timestamp:
+    description: >
+      timestamp string of UTC value and in <a
+      href="https://tools.ietf.org/html/rfc3339">RFC format</a>.
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(Z|\+00:00|-00:00)$'
+    minLength: 1
+    maxLength: 50
+  LocationObject:
+    description: An object containing a timestamp and a location for asset at the time.
+    type: object
+    required:
+      - location
+      - timestamp
+    properties:
+      location:
+        $ref: '#/definitions/Location'
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+  LocationObjects:
+    description: An array of location objects.
+    type: array
+    items:
+      $ref: '#/definitions/LocationObject'
+  CollectionObject:
+    description: 'An object containing collection name, and an array of asset ids.'
+    type: object
+    required:
+      - collection
+      - assets
+    properties:
+      collection:
+        type: string
+      assets:
+        type: array
+        items:
+          type: string
+  CollectionNames:
+    description: An array of collection names.
+    type: object
+    properties:
+      collections:
+        type: array
+        items:
+          type: string
+  QueryObject:
+    description: Contains query parameters and values for all query types.
+    type: object
+    properties:
+      start:
+        $ref: '#/definitions/Timestamp'
+      end:
+        $ref: '#/definitions/Timestamp'
+      bbox:
+        $ref: '#/definitions/BoundingBox'
+      limit:
+        type: integer
+        minimum: 1
+  addAssetLocationBody:
+    description: >
+      Contains properties that define the new asset location and the retention
+      of existing asset locations.
+
+      Mandatory properties location and timestamp define the new asset location.
+      Mandatory property retain_history and
+
+      optional property purge_history_before control the deletion and retention
+      of existing asset locations.
+    type: object
+    properties:
+      location:
+        $ref: '#/definitions/Location'
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+      retain_history:
+        type: boolean
+      purge_history_before:
+        $ref: '#/definitions/Timestamp'
+    required:
+      - location
+      - timestamp
+      - retain_history
