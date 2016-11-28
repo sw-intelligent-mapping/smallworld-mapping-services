@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Swagger UI</title>
-  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+  <title>Intelligent Mapping API</title>
+  <!--<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />-->
   <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
   <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -37,8 +37,6 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        //url = "http://petstore.swagger.io/v2/swagger.json";
-		//url = "./ims_publicswagger.yaml";
 		url = "https://sw-intelligent-mapping.github.io/smallworld-mapping-services/dist/ims_publicSwagger.yaml";
       }
 
@@ -91,11 +89,11 @@
   
   <style>
 
-.general {background-color: #bcbcbc; color: #ffffff;}
-.put {background-color: #FF9821; color: #ffffff;}
-.post {background-color: #3AB4D4; color: #ffffff;}
-.get {background-color: #2886AF; color: #ffffff;}
-.delete {background-color: #B71125; color: #ffffff;}
+.CS_general {background-color: #bcbcbc; color: #ffffff;}
+.CS_put {background-color: #FF9821; color: #ffffff;}
+.CS_post {background-color: #3AB4D4; color: #ffffff;}
+.CS_get {background-color: #2886AF; color: #ffffff;}
+.CS_delete {background-color: #B71125; color: #ffffff;}
 
 .box {
 	border: 1px solid #000000; 
@@ -106,11 +104,11 @@
 .column1 {
 	float: left;
 	width: 450px
-	height: 300px;
+	height: 600px;
 }
 .column2 {
 	width: 450px;
-	height: 300px;
+	height: 600px;
 	margin-left: 455px;
 	}
 
@@ -124,6 +122,9 @@
 .heading, .content {
 	padding: 5px;
 	}
+	
+.content {
+	font-size: 90%;}	
 </style>
 
 </head>
@@ -150,7 +151,7 @@
 
 
 <div class="box">
-	<div class="heading general"><b>Headers</b></div>
+	<div class="heading CS_general"><b>Headers</b></div>
 	<div class="content">
 		Predix-Zone-Id: 785aabb0-a626-47a1-837c-78b3dba266eb</br>
 		X-Subtenant-Id: subtenant1</br>
@@ -161,7 +162,7 @@
 
 
 <div class="box">
-	<div class="heading general"><b>Endpoints</b></div>
+	<div class="heading CS_general"><b>Endpoints</b></div>
 	<div class="content">
 		BASIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://intelligent-mapping-prod.run.aws-usw02-pr.ice.predix.io/v1/…</br>
 		SELECT 	&nbsp;&nbsp; https://intelligent-mapping-prod.run.asv-pr.ice.predix.io/v1/...
@@ -173,7 +174,7 @@
 
 
 	<div class="cell">
-		<div class="heading post"><b>Add a Collection</b></div>
+		<div class="heading CS_post"><b>Add a Collection</b></div>
 		<div class="content">
 			POST …v1/collections/transformers</br>
 			BODY</br>
@@ -182,7 +183,7 @@
 	</div>
 
 	<div class="cell">
-		<div class="heading post"><b>Add a Feature to a Collection</b></div>
+		<div class="heading CS_post"><b>Add a Feature to a Collection</b></div>
 		<div class="content">
 			POST …v1/collections/transformers/features/TX002</br>
 			BODY</br>
@@ -191,21 +192,49 @@
 	</div>
 
 	<div class="cell">
-		<div class="heading get"><b>List all Collecitons</b></div>
+		<div class="heading CS_get"><b>List all Collections</b></div>
 		<div class="content">
 			GET …v1/collections</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading delete"><b>Delete a Colleciton</b></div>
+		<div class="heading CS_delete"><b>Delete a Collection</b></div>
 		<div class="content">
 			DELETE …v1/collections/transformers</br>
 		</div>
 </div>
 
+	<div class="cell">
+		<div class="heading CS_get"><b>Get a Feature from a Collection</b></div>
+		<div class="content">
+			GET …v1/collections/transformers/features/TX001
+		</div>
+	</div>
 
+	<div class="cell">
+		<div class="heading CS_delete"><b>Delete a Feature from a Collection</b></div>
+		<div class="content">
+			DELETE …v1/collections/transformers/features/TX001
+		</div>
+</div>
 
+	<div class="cell">
+		<div class="heading CS_put"><b>Update a Feature in a Collection</b></div>
+		<div class="content">
+			PUT …v1/collections/transformers/features/TX001</br>
+			BODY</br>
+			GeoJSON featureCollection
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_get"><b>Cluster the Features witin a Collection</b></div>
+		<div class="content">
+			GET …v1/collections/transformers/cluster?
+   zoomLevel=15&left=0&right=4&bottom=46&top=50
+		</div>
+</div>
 	
 </div>
 <div class="column2">
@@ -213,21 +242,21 @@
 
 
 	<div class="cell">
-		<div class="heading get"><b>Get all features in a Collection</b></div>
+		<div class="heading CS_get"><b>Get all features in a Collection</b></div>
 		<div class="content">
 			GET …v1/collections/transformers</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading get"><b>Find all Features in a Collection within a bounding box</b></div>
+		<div class="heading CS_get"><b>Find all Features in a Collection within a bounding box</b></div>
 		<div class="content">
 				GET /v1/collections/transformers/spatial-query/bbox-interacts?left=0&right=4&bottom=46&top=50
 		</div>
 	</div>
 	
 	<div class="cell">
-		<div class="heading post"><b>Gat all Features within an Area</b></div>
+		<div class="heading CS_post"><b>Get all Features within an Area</b></div>
 		<div class="content">
 			POST …v1/collections/tranformers/spatial-query?operator=within</br>
 			BODY</br>
@@ -239,8 +268,32 @@
 		</div>
 	</div>	
 	
+	<div class="cell">
+		<div class="heading CS_get"><b>Find all Features in a Collection that match a search term</b></div>
+		<div class="content">
+				GET …v1/collections/transformers/Text?q=overloaded
+		</div>
+	</div>
 	
+	<div class="cell">
+		<div class="heading CS_post"><b>Get Nearest Feature in a Collection</b></div>
+		<div class="content">
+			POST …v1/collections/tranformers/spatial-query?operator=nearest</br>
+			BODY</br>
+			{</br>
+			“longitude”: -1,</br>
+			“latitude”: 50</br>
+			}
+		</div>
+	</div>	
 
+		<div class="cell">
+		<div class="heading CS_get"><b>count the number of Features in a Collection</b></div>
+		<div class="content">
+				GET …v1/collections/transformers/collectionSize
+		</div>
+	</div>
+	
 </div>
 
 </div>
