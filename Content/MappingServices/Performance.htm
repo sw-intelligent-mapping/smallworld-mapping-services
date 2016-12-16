@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting started with Intelligent Mapping and Dynamic Mapping services">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Intelligent Mapping performance</title>
+        <link href="../Resources/Stylesheets/swStyles.css" rel="stylesheet" />
+        <meta name="description" content="This article lists the high-level tasks for getting started with the Intelligent Mapping services. Smallworld Intelligent Mapping Services" />
+        <script src="../../Resources/Scripts/custom.modernizr.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <div class="header"><a name="kanchor11"></a>
+            <h1>Intelligent Mapping performance</h1>
+            <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
+        </div>
+        <div class="footer">
+            <table style="width: 100%;margin-left: 0;margin-right: auto;">
+                <col style="width: 59px;" />
+                <col />
+                <col style="width: 100px;" />
+                <col style="width: 200px;" />
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="sw_copyright"><a href="../A_Navigation/Copyright/swCopyright.htm" title="Copyright and trademark information" alt="Copyright and trademark information" class="sw_copyright">© <span class="CopyrightCopyright">GE</span></a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_footer_title">Intelligent Mapping performance</p>
+                        </td>
+                        <td>
+                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_update">Last update: 16th August 2016</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article">
+            <p>The Intelligent Mapping services ingest, store and return results in GeoJSON format. GeoJSON is an open standard designed for representing simple geographic features along with their non-spatial attributes. It is supported by a wide range of mapping frameworks such as OpenLayers and Leaflet. The Intelligent Mapping service stores the full GeoJSON for a feature and returns it in its entirety when queries are made. Therefore, network latency has a big impact on the performance, especially when exchanging large volumes of GeoJSON data. Within our local environment we have seen big differences between the time taken by our services to fulfil a request and the time taken for those responses to complete on a remote client. In our case, these differences were cause by our corporate proxies and security scans. You may find that similar network overheads apply to your own environment. We recommend that you use a network configuration that can transfer data as efficiently as possible.</p>
+            <p>You should carefully consider the following as they directly affect the size of the GeoJSON and therefore performance:</p>
+            <ul>
+                <li value="1">The attributes that are store in the GeoJSON</li>
+                <li value="2">The number of points within the feature’s geometry </li>
+            </ul>
+            <p>As a rule of thumb, only store attributes that will be required for styling the feature on a map or that will be used for simple querying. If an applications needs to store more complex data about each feature then consider using Predix Asset Data in conjunction with Intelligent Mapping.</p>
+            <h3>Spatial queries</h3>
+            <p>The Intelligent Mapping service is capable of retrieving 100,000 points, each with 10 attributes, in under 7 seconds. However, we have observed within our network that it can take another 46 seconds to transfer the 35 MB of data across the network. </p>
+            <p>It’s unlikely that an application would want to display 100,000 points on a map and a more representative query would return 1% of the data based on a bounding box query. The Intelligent Mapping service can return 1% of a 100,000 collection in under 0.8 seconds. In this case  we have observed an additional 4.5 seconds to transfer the data.</p>
+            <p>We will be developing data aggregation services in the future that will process these large result sets on the server into cluster or heatmaps before returning the results to the requesting application.</p>
+            <h3>Data ingestion</h3>
+            <p>The Intelligent Mapping service has been optimised for data retrieval rather than data ingestion. To achieve the best ingestion performance we recommend splitting the data up into featureCollections of around 25,000 features. These files can be sent in parallel to our ingestion services. Ingesting 25,000 point features, each with 10 attributes, should take less than 20 seconds. </p>
+            <p class="Note">There is a hard file limit of 50Mb.</p>
+        </div>
+    </body>
+</html>

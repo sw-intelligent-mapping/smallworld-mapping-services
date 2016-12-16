@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting started with Intelligent Mapping and Dynamic Mapping services">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Adding Intelligent Mapping or Dynamic Mapping services to your application</title>
+        <link href="../Resources/TableStyles/swStripedTable.css" rel="stylesheet" data-mc-stylesheet-type="table" />
+        <link href="../Resources/Stylesheets/swStyles.css" rel="stylesheet" />
+        <meta name="description" content="This article xxx. Smallworld Intelligent Mapping Services" />
+        <script src="../../Resources/Scripts/custom.modernizr.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <div class="header"><a name="kanchor8"></a>
+            <h1>Adding Intelligent Mapping or Dynamic Mapping services to your application</h1>
+            <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
+        </div>
+        <div class="footer">
+            <table style="width: 100%;margin-left: 0;margin-right: auto;">
+                <col style="width: 59px;" />
+                <col />
+                <col style="width: 100px;" />
+                <col style="width: 200px;" />
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="sw_copyright"><a href="../A_Navigation/Copyright/swCopyright.htm" title="Copyright and trademark information" alt="Copyright and trademark information" class="sw_copyright">© <span class="CopyrightCopyright">GE</span></a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_footer_title">Adding Intelligent Mapping or Dynamic Mapping services to your application</p>
+                        </td>
+                        <td>
+                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_update">Last update: 28th September 2016</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article">
+            <h3>Before you begin</h3>
+            <p>You must update your OAuth2 client to use your service instance before you perform this task.</p>
+            <h3>Procedure</h3>
+            <p>This process is in two parts:</p>
+            <ul>
+                <li value="1">Getting a bearer token from UAA, which is used in the second part.</li>
+                <li value="2">Making sure client applications can access geospatial data using Intelligent Mapping or Dynamic Mapping service REST API endpoints.</li>
+            </ul>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" /></a><a name="Getting_a_Bearer_Token_from_UAA"></a><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_" style="background-image: none; padding: 0px;">Getting a Bearer Token from UAA</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>In a REST client, Authorization tab:</p>
+                    <ol>
+                        <li value="1">Choose the GET method.</li>
+                        <li value="2">Enter the URI of your UAA instance, such as: </li>
+                        <li class="code">https://&lt;your_uaa_instance_uri&gt;/oauth/token?grant_type=client_credentials</li>
+                        <li class="continuation">
+                            <p class="Note">Make sure you include <code>grant_type=client_credentials</code> in your URI.</p>
+                        </li>
+                        <li value="3">Add the following information as shown in the graphic below the table.</li>
+                        <li class="continuation">
+                            <table style="width: 100%;mc-table-style: url('../Resources/TableStyles/swStripedTable.css');" class="TableStyle-swStripedTable" cellspacing="0">
+                                <col class="TableStyle-swStripedTable-Column-Column1" />
+                                <col class="TableStyle-swStripedTable-Column-Column1" />
+                                <tbody>
+                                    <tr class="TableStyle-swStripedTable-Body-Body1">
+                                        <td class="TableStyle-swStripedTable-BodyE-Column1-Body1"><b>Type</b>
+                                        </td>
+                                        <td class="TableStyle-swStripedTable-BodyD-Column1-Body1">Select <b>Basic Auth</b> from the drop-down list.</td>
+                                    </tr>
+                                    <tr class="TableStyle-swStripedTable-Body-Body2">
+                                        <td class="TableStyle-swStripedTable-BodyE-Column1-Body2"><b>Username</b>
+                                        </td>
+                                        <td class="TableStyle-swStripedTable-BodyD-Column1-Body2">Enter the client ID that you created in <a href="UpdatingOAuth2ClientToUseInstance.htm" class="MCXref xref">Updating OAuth2 client to use your service instance</a>.</td>
+                                    </tr>
+                                    <tr class="TableStyle-swStripedTable-Body-Body1">
+                                        <td class="TableStyle-swStripedTable-BodyB-Column1-Body1"><b>Password</b>
+                                        </td>
+                                        <td class="TableStyle-swStripedTable-BodyA-Column1-Body1">Enter the client secret that you created in <a href="UpdatingOAuth2ClientToUseInstance.htm" class="MCXref xref">Updating OAuth2 client to use your service instance</a>.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li value="4">Click <b>Send</b>.</li>
+                        <li value="5">Select the access_token that is returned and copy it to your clipboard. This is the token that you need in the <a href="#Ensuring_client_apps_can_access_Intelligent_mapping_data" class="MCXref xref selected">Ensuring client apps can access Intelligent mapping data</a> procedure.</li>
+                        <li value="6">Verify that the scope given is the same as used in the VCAP_SERVICES environment variable</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" /></a><a name="Ensuring_client_apps_can_access_Intelligent_mapping_data"></a><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_" style="background-image: none; padding: 0px;">Ensuring client apps can access Intelligent mapping data</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>In a REST client:</p>
+                    <ol>
+                        <li value="1">Choose the POST method.</li>
+                        <li value="2">Enter the URI of your service instance, from the VCAP_SERVICES environment variable. To post data, enter:</li>
+                        <li class="code">https://&lt;production URL&gt;/v1/collections/coll1</li>
+                        <li value="3">Add the following HTTP headers to the request:</li>
+                        <li class="continuation">
+                            <table style="width: 100%;mc-table-style: url('../Resources/TableStyles/swStripedTable.css');" class="TableStyle-swStripedTable" cellspacing="0">
+                                <col class="TableStyle-swStripedTable-Column-Column1" />
+                                <col class="TableStyle-swStripedTable-Column-Column1" />
+                                <tbody>
+                                    <tr class="TableStyle-swStripedTable-Body-Body1">
+                                        <td class="TableStyle-swStripedTable-BodyE-Column1-Body1">Content-Type</td>
+                                        <td class="TableStyle-swStripedTable-BodyD-Column1-Body1">Enter the value <b>application/json</b>.</td>
+                                    </tr>
+                                    <tr class="TableStyle-swStripedTable-Body-Body2">
+                                        <td class="TableStyle-swStripedTable-BodyE-Column1-Body2">Authorization</td>
+                                        <td class="TableStyle-swStripedTable-BodyD-Column1-Body2">Enter the token you receive from UAA in the form of <b>Bearer &lt;token from trusted issuer&gt;</b> in the <a href="#Getting_a_Bearer_Token_from_UAA" class="MCXref xref selected">Getting a Bearer Token from UAA</a> procedure.</td>
+                                    </tr>
+                                    <tr class="TableStyle-swStripedTable-Body-Body1">
+                                        <td class="TableStyle-swStripedTable-BodyE-Column1-Body1">Predix-Zone-Id</td>
+                                        <td class="TableStyle-swStripedTable-BodyD-Column1-Body1">	Enter the ID required to make REST calls, using the <b>instanceId</b> value specified in the VCAP-SERVICES environment variable.</td>
+                                    </tr>
+                                    <tr class="TableStyle-swStripedTable-Body-Body2">
+                                        <td class="TableStyle-swStripedTable-BodyB-Column1-Body2">X-Subtenant-Id</td>
+                                        <td class="TableStyle-swStripedTable-BodyA-Column1-Body2">Enter an ID to identify a subtenant within the Predix-Zone-Id. If no subtenants are needed, use the Predix-Zone-Id.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </li>
+                        <li value="4">Enter a well-formed GeoJSON string in the body of your request to store the GeoJSON data in a new collection called <i>coll1</i>.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

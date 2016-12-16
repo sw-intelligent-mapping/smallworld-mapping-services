@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting started with Intelligent Mapping and Dynamic Mapping services">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Updating OAuth2 client to use your service instance</title>
+        <link href="../Resources/Stylesheets/swStyles.css" rel="stylesheet" />
+        <meta name="description" content="This article describes how you update your OAuth2 client to use your service instance. Smallworld Intelligent Mapping Services" />
+        <script src="../../Resources/Scripts/custom.modernizr.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <div class="header"><a name="kanchor7"></a>
+            <h1>Updating OAuth2 client to use your service instance</h1>
+            <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
+        </div>
+        <div class="footer">
+            <table style="width: 100%;margin-left: 0;margin-right: auto;">
+                <col style="width: 59px;" />
+                <col />
+                <col style="width: 100px;" />
+                <col style="width: 200px;" />
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="sw_copyright"><a href="../A_Navigation/Copyright/swCopyright.htm" title="Copyright and trademark information" alt="Copyright and trademark information" class="sw_copyright">© <span class="CopyrightCopyright">GE</span></a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_footer_title">Updating OAuth2 client to use your service instance</p>
+                        </td>
+                        <td>
+                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_update">Last update: 28th September 2016</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article">
+            <h3>Before you begin</h3>
+            <p>You must bind your application to &lt;my_service_instance_name&gt; before you perform this task.</p>
+            <p>When a service is protected by UAA, the scope controls what type of access is allowed to the service. The scope is created when you set up the service in Predix</p>
+            <h3>Procedure</h3>
+            <ol>
+                <li value="1">To enable applications to access the Intelligent Mapping or Dynamic Mapping service, your JSON Web Token (JWT) must contain the following scope:</li>
+                <li class="code">&lt;service&gt;.zones.&lt;service_instance_guid&gt;.user</li>
+                <li class="continuation">Where <code>&lt;service&gt;</code> is <i>intelligent-mapping</i> or <i>dynamic-mapping</i>.</li>
+                <li class="continuation">
+                    <p class="Note">The OAuth2 scope is created when you set up the service in Predix.</p>
+                </li>
+                <li value="2">To configure your instance of Predix UAA without using extra tools, use the <a href="https://predix-starter.run.aws-usw02-pr.ice.predix.io/" target="_blank">Predix Starter Kit (for Basic Users)</a> or the <a href="https://predix-starter.run.asv-pr.ice.predix.io/" target="_blank">Predix Starter Kit (for Select Users)</a>.</li>
+                <li value="3">In the Predix Starter Kit screen, click <b>Login as Admin</b>.</li>
+                <li value="4">In the login screen, enter the following:</li>
+                <ul>
+                    <li value="1">The predix-uaa URL from the VCAP_SERVICES environmental variable in the <b>UAA URL:</b> field.</li>
+                    <li value="2">The admin secret in the <b>Admin secret:</b> field.</li>
+                </ul>
+                <li value="5">Click <b>Submit</b>.</li>
+                <li value="6">Return to the Predix Starter Kit screen and click <b>Create Client ID</b>.</li>
+                <li value="7">Verify that the <b>UAA URL:</b> shown here is the same as the one you provided when you logged in.</li>
+                <li value="8">In the <b>New client ID:</b> field, enter a client ID of your choosing, such as <i>int_map_test</i>.</li>
+                <li value="9">In the <b>New client secret:</b> field, enter a client secret of your choosing.</li>
+                <li value="10">In the <b>Request</b> field, note the following:</li>
+                <ul>
+                    <li value="1">The client_id and client_secret are now populated with your choices.</li>
+                    <li value="2">For "scope", in <code>["uaa.none","openid"]</code>, add a comma after "openid" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example:</li>
+                    <li class="code">["uaa.none","openid","intelligent-mapping.zones.197a9395-b047-47df-8247-ae6d8db987f4.user"] </li>
+                    <li value="3">For "authorities", in <code>["openid","uaa.none","uaa.resource"]</code>, add a comma after "uaa.resource" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example</li>
+                    <li class="code">["openid","uaa.none","uaa.resource"," intelligent-mapping.zones.197a9395-b047-47df-8247-ae6d8db987f4.user"]</li>
+                </ul>
+                <li class="continuation">
+                    <p class="Note">Make sure the OAuth2 scope is added when creating the Client ID. This is obtained from the VCAP_SERVICES environmental variable of the service you created.</p>
+                </li>
+                <li value="11">Click <b>Submit</b>.</li>
+            </ol>
+        </div>
+    </body>
+</html>
