@@ -1,1 +1,1 @@
-define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/IntelligentMappingServices/AddingServicesToApplication.htm'],s:['0'],p:[['0',8],['provides',0]]});
+define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/A_Navigation/Copyright/swCopyright.htm'],s:['0'],p:[['0',10],['map',12]]});
