@@ -1,0 +1,169 @@
+/*<meta />*/
+
+/* This style sheet is for the Copyright page for the website */
+/* Last update: 25/11/14 (KS) to align with main style sheet   */
+
+body
+{
+	line-height: 120%;
+	font-family: Tahoma, Verdana, 'Trebuchet MS', Arial, sans-serif;
+}
+
+/* ===================================================== */
+/* Headings */
+/* ===================================================== */
+
+h1,
+h2,
+h3,
+h5,
+h6
+{
+	font-family: 'GE Inspira', 'Trebuchet MS', Arial, sans-serif;
+	font-weight: normal;
+	page-break-after: avoid;
+	/* This should be in the print medium */
+	margin-left: 0;
+	color: #313337;
+	line-height: 120%;
+	margin-bottom: 0;
+}
+
+h1
+{
+	font-size: 2.25em;
+	margin-top: 0px;
+	margin-bottom: 24px;
+	border-bottom: solid 1px #bfc2c5;
+	padding-bottom: 10px;
+}
+
+h2
+{
+	font-size: 1.5em;
+	margin-top: 24px;
+	margin-bottom: 12px;
+}
+
+h3
+{
+	font-size: 1.125em;
+	color: #005cb9;
+	margin-bottom: 6px;
+}
+
+
+h5	/* Added 14/10/14 (KS) */
+{
+	font-size: 0.9em;
+	font-style: italic;
+	font-weight: bold;
+	color: #00366e;
+	margin-bottom: 3px;
+}
+
+h6
+{
+	margin-left: 0;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	color: #5c5f63;
+	font-size: 0.8em;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-weight: bold;
+}
+
+
+/* ======================================================== */
+/* PARAGRAPH STYLES */
+/* ======================================================== */
+/* Basic paragraph */
+
+p
+{
+	margin: 10px;
+	font-size: 0.8em;
+	margin-left: 0;
+	line-height: 140%;
+}
+
+
+
+/* ============================================================================================= */
+/* Links and cross references */
+/* ============================================================================================= */
+/* Links */
+
+a
+{
+	color: #3b73b9;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus
+{
+	color: #22436b;
+	text-decoration: underline;
+}
+
+
+
+a[href*='.htm']
+{
+	background-image: url('Shared/ico_link_sm.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+
+a[href*='.pdf']
+{
+	background-image: url('Shared/pdf_link_12x12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+a[href*='http']
+{
+	background-image: url('Shared/external_link_12x12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left: 14px;
+}
+
+
+/* ======================================================================= */
+
+/*                                        CHARACTER STYLES 
+===========================================================================*/
+
+/* Modified 15/10/14 (KS) */
+
+b,
+strong
+{
+	font-weight: bold;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+}
+
+/* Modified 15/10/14 (KS) */
+
+i,
+em
+{
+	font-style: italic;
+	font-family: Arial, 'Trebuchet MS', Tahoma, Verdana, sans-serif;
+}
+
+/* Modified 15/10/14 (KS) */
+
+b.bold_italic
+{
+	font-style: italic;
+	font-weight: bold;
+}
+
