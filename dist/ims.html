@@ -44,7 +44,7 @@
         highlightSizeThreshold: 5000
       });
 
-      // Pre load translate...
+      // Pre load translate..
       if(window.SwaggerTranslator) {
         window.SwaggerTranslator.translate();
       }
@@ -155,7 +155,7 @@
 	<div class="content">
 		Predix-Zone-Id: 785aabb0-a626-47a1-837c-78b3dba266eb</br>
 		X-Subtenant-Id: subtenant1</br>
-		Authorization: Bearer eyJhbGciOiJSUzI...</br>
+		Authorization: Bearer eyJhbGciOiJSUzI..</br>
 		Content-Type: application/json</br>
 	</div>
 </div>
@@ -164,8 +164,8 @@
 <div class="box">
 	<div class="heading CS_general"><b>Endpoints</b></div>
 	<div class="content">
-		BASIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://intelligent-mapping-prod.run.aws-usw02-pr.ice.predix.io/v1/...</br>
-		SELECT 	&nbsp;&nbsp; https://intelligent-mapping-prod.run.asv-pr.ice.predix.io/v1/...
+		BASIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://intelligent-mapping-prod.run.aws-usw02-pr.ice.predix.io/v1/..</br>
+		SELECT 	&nbsp;&nbsp; https://intelligent-mapping-prod.run.asv-pr.ice.predix.io/v1/..
 	</div>
 </div>
 
@@ -176,7 +176,7 @@
 	<div class="cell">
 		<div class="heading CS_post"><b>Add a Collection</b></div>
 		<div class="content">
-			POST ...v1/collections/transformers</br>
+			POST ..v1/collections/transformers</br>
 			BODY</br>
 			&nbsp;&nbsp;GeoJSON FeatureCollection</br>
 		</div>
@@ -185,7 +185,7 @@
 	<div class="cell">
 		<div class="heading CS_post"><b>Add a Feature to a Collection</b></div>
 		<div class="content">
-			POST ...v1/collections/transformers/features/TX002</br>
+			POST ..v1/collections/transformers/features/TX002</br>
 			BODY</br>
 			&nbsp;&nbsp;GeoJSON FeatureCollection</br>
 		</div>
@@ -194,35 +194,35 @@
 	<div class="cell">
 		<div class="heading CS_get"><b>List all Collections</b></div>
 		<div class="content">
-			GET ...v1/collections</br>
+			GET ..v1/collections</br>
 		</div>
 	</div>
 
 	<div class="cell">
 		<div class="heading CS_delete"><b>Delete a Collection</b></div>
 		<div class="content">
-			DELETE ...v1/collections/transformers</br>
+			DELETE ..v1/collections/transformers</br>
 		</div>
 </div>
 
 	<div class="cell">
 		<div class="heading CS_get"><b>Get a Feature from a Collection</b></div>
 		<div class="content">
-			GET ...v1/collections/transformers/features/TX001
+			GET ..v1/collections/transformers/features/TX001
 		</div>
 	</div>
 
 	<div class="cell">
 		<div class="heading CS_delete"><b>Delete a Feature from a Collection</b></div>
 		<div class="content">
-			DELETE ...v1/collections/transformers/features/TX001
+			DELETE ..v1/collections/transformers/features/TX001
 		</div>
 </div>
 
 	<div class="cell">
 		<div class="heading CS_put"><b>Update a Feature in a Collection</b></div>
 		<div class="content">
-			PUT ...v1/collections/transformers/features/TX001</br>
+			PUT ..v1/collections/transformers/features/TX001</br>
 			BODY</br>
 			GeoJSON featureCollection
 		</div>
@@ -231,7 +231,7 @@
 	<div class="cell">
 		<div class="heading CS_get"><b>Cluster the Features witin a Collection</b></div>
 		<div class="content">
-			GET ...v1/collections/transformers/cluster?
+			GET ..v1/collections/transformers/cluster?
    zoomLevel=15&left=0&right=4&bottom=46&top=50
 		</div>
 </div>
@@ -244,7 +244,7 @@
 	<div class="cell">
 		<div class="heading CS_get"><b>Get all features in a Collection</b></div>
 		<div class="content">
-			GET ...v1/collections/transformers</br>
+			GET ..v1/collections/transformers</br>
 		</div>
 	</div>
 
@@ -258,7 +258,7 @@
 	<div class="cell">
 		<div class="heading CS_post"><b>Get all Features within an Area</b></div>
 		<div class="content">
-			POST ...v1/collections/tranformers/spatial-query?operator=within</br>
+			POST ..v1/collections/tranformers/spatial-query?operator=within</br>
 			BODY</br>
 			{</br>
 			"geometry": {</br>
@@ -271,14 +271,14 @@
 	<div class="cell">
 		<div class="heading CS_get"><b>Find all Features in a Collection that match a search term</b></div>
 		<div class="content">
-				GET ...v1/collections/transformers/Text?q=overloaded
+				GET ..v1/collections/transformers/Text?q=overloaded
 		</div>
 	</div>
 	
 	<div class="cell">
 		<div class="heading CS_post"><b>Get Nearest Feature in a Collection</b></div>
 		<div class="content">
-			POST ...v1/collections/tranformers/spatial-query?operator=nearest</br>
+			POST ..v1/collections/tranformers/spatial-query?operator=nearest</br>
 			BODY</br>
 			{</br>
 			"longitude": -1,</br>
@@ -290,7 +290,7 @@
 		<div class="cell">
 		<div class="heading CS_get"><b>count the number of Features in a Collection</b></div>
 		<div class="content">
-				GET ...v1/collections/transformers/collectionSize
+				GET ..v1/collections/transformers/collectionSize
 		</div>
 	</div>
 	
