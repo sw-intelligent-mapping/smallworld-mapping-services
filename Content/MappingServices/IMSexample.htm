@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-gb" xml:lang="en-gb" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Examples and demonstrations">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Setting up a simple application using the Intelligent Mapping Service</title>
+        <link href="../Resources/Stylesheets/swStyles.css" rel="stylesheet" />
+        <meta name="description" content="This article describes how you can set up a simple application using the Intelligent Mapping Service. Smallworld Intelligent Mapping Services" />
+        <script src="../../Resources/Scripts/custom.modernizr.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js" type="text/javascript">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js" type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <div class="header"><a name="kanchor13"></a>
+            <h1>Setting up a simple application using the Intelligent Mapping Service</h1>
+            <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
+        </div>
+        <div class="footer">
+            <table style="width: 100%;margin-left: 0;margin-right: auto;">
+                <col style="width: 59px;" />
+                <col />
+                <col style="width: 100px;" />
+                <col style="width: 200px;" />
+                <tbody>
+                    <tr>
+                        <td>
+                            <p class="sw_copyright"><a href="../A_Navigation/Copyright/swCopyright.htm" title="Copyright and trademark information" alt="Copyright and trademark information" class="sw_copyright">© <span class="CopyrightCopyright">GE</span></a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_footer_title">Setting up a simple application using the Intelligent Mapping Service</p>
+                        </td>
+                        <td>
+                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com?subject=(Predix) Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
+                            </p>
+                        </td>
+                        <td>
+                            <p class="sw_update">Last update: 6th January 2017</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="article">
+            <p>This article guides you through the processes involved in setting up a basic web application that uses the Intelligent Mapping Service (IMS) to display asset data on a map.</p>
+            <p>This will include client side JavaScript, an Express server to route the requests to Predix and a basic HTML page.</p>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Prerequisites</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <ul>
+                        <li value="1">Your GeoJSON data to display in a  <i>collection.geojson</i> file</li>
+                        <li value="2">Node.js (available from <a href="https://nodejs.org/" target="_blank">https://nodejs.org</a>)</li>
+                        <li value="3">Follow steps 1 to 6 in <a href="ProcessOverview.htm" class="MCXref xref" xrefformat="{paratext}">Process overview</a> to set up a service instance</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setup</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>Create the working directory and install the required NPM packages:</p>
+                    <ol>
+                        <li value="1">Create a working directory to contain the web application, for example, <i>c:\BasicIMSapplication</i>.</li>
+                        <li value="2">Copy your GeoJSON data file, <i>collection.geojson</i>, into the working directory.</li>
+                        <li value="3">In a Windows command dialog change directory to the working directory.</li>
+                        <li value="4">Install the Express web application framework by entering the following command line: </li>
+                        <li class="code">npm install express</li>
+                        <li value="5">Install the Request JavaScript library (allows you to make simple http calls) by entering the following command line:</li>
+                        <li class="code"> npm install request</li>
+                        <li value="6">Install the Bluebird JavaScript library (allows you to implement Promises) by entering the following command line: </li>
+                        <li class="code">npm install bluebird</li>
+                        <li class="continuation">Promises are a way to make asynchronous calls in JavaScript, Bluebird allows us to ‘promisify’ libraries that don't implement promises. In this example we will want to promisify the Request library.</li>
+                    </ol>
+                    <p>Now we will create an HTML page to display our application. Create a new file called <i>index.html</i> in the working directory and add the following code:</p>
+                    <div class="code"><pre xml:space="preserve">&lt;html lang="en"&gt;</pre><pre xml:space="preserve">  &lt;head&gt;</pre><pre xml:space="preserve">    &lt;meta charset="UTF-8"&gt;</pre><pre xml:space="preserve">    &lt;title&gt;IMS example&lt;/title&gt;</pre><pre xml:space="preserve">    &lt;script src="https://openlayers.org/en/v3.19.1/build/ol.js"&gt;&lt;/script&gt;</pre><pre xml:space="preserve">    &lt;script src="script.js"&gt;&lt;/script&gt;</pre><pre xml:space="preserve">  &lt;/head&gt;</pre><pre xml:space="preserve">  &lt;body onload="init()"&gt;</pre><pre xml:space="preserve">    &lt;div id="map" style="height: 600px; width: 600px; display: block; margin: 10px;"&gt;&lt;/div&gt;</pre><pre xml:space="preserve">    &lt;button id="Post" onclick="postColl()"&gt;Post collection&lt;/button&gt;</pre><pre xml:space="preserve">    &lt;button id="Get" onclick="getColl()"&gt;Get collection&lt;/button&gt;</pre><pre xml:space="preserve">  &lt;/body&gt;</pre><pre>&lt;/html&gt;</pre>
+                    </div>
+                    <p>This HTML file will: </p>
+                    <ul>
+                        <li value="1">Load the OpenLayers library. This JavaScript library is used to display and interact with maps.</li>
+                        <li value="2">Load a <i>script.js</i> JavaScript file. We will create this file in the next section.</li>
+                        <li value="3">Create a <b>div</b> HTML element to display a map inside.</li>
+                        <li value="4">Add <b>Post collection</b> and <b>Get collection</b> buttons that will make calls to our IMS instance.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up JavaScript to display a map</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>Create a file named <i>script.js</i> in the working directory and add the following code:</p>
+                    <div class="code"><pre>var map;</pre><pre>var vectorSource;</pre><pre>var formatter;</pre><pre>function init() {</pre><pre>  vectorSource = new ol.source.Vector();</pre><pre>  formatter = new ol.format.GeoJSON();</pre><pre>  var mapLayers = [</pre><pre>    new ol.layer.Tile({</pre><pre>      source: new ol.source.OSM()</pre><pre>    }),</pre><pre>    new ol.layer.Vector({</pre><pre>      source: vectorSource</pre><pre>    })</pre><pre>  ];</pre><pre>  map = new ol.Map({</pre><pre>    layers: mapLayers,</pre><pre>    target: 'map',</pre><pre>    view: new ol.View({</pre><pre>      center: ol.proj.transform([-0.083825, 52.21668333], 'EPSG:4326', 'EPSG:3857'),</pre><pre>      zoom: 14,</pre><pre>      maxZoom: 21</pre><pre>    })</pre><pre>  });</pre><pre>}</pre>
+                    </div>
+                    <p>This JavaScript file defines the <code> init()</code> function that is called when our HTML file is loaded. This function: </p>
+                    <ul>
+                        <li value="1">Defines the source objects that allow the OpenLayers map to be created and displayed.</li>
+                        <li value="2">Creates the base layer and the asset data layer.</li>
+                        <li value="3">Creates the map.</li>
+                    </ul>
+                    <p class="Note">The <b>target</b> property defines the place in the HTML where the map is presented.</p>
+                    <p>At this point the page can be run and you should see a map centered in Cambourne in the UK.</p>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up the Express Server</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>The next step is to make the requests to IMS to allow us to POST and GET geospatial data. To do this we will add more code to our <i>script.js</i> file to make requests and will start to implement an Express server.</p>
+                    <p>We already have a couple of buttons on our HTML page which are calling functions when clicked so we need to write these functions. After the end of the <code>init()</code> function add the following:</p>
+                    <div class="code"><pre>//Helper function to make requests</pre><pre>function makeRequest(type, fullUrl, callback) {</pre><pre>  var request = new XMLHttpRequest();</pre><pre>  request.open(type, fullUrl, true);</pre><pre>  request.setRequestHeader('Content-type', 'application/json');</pre><pre>  request.onreadystatechange = function () {</pre><pre>    if(request.readyState &gt; 3) {</pre><pre>      if(request.status === 200){</pre><pre>        callback(null, request.response);</pre><pre>      } else {</pre><pre>        callback(request.response, null);</pre><pre>      }</pre><pre>    }</pre><pre>  };</pre><pre>  request.send();</pre><pre>}</pre><pre>function getColl(){</pre><pre>  makeRequest('GET', '/v1/collections/coll', function(err, data) {</pre><pre>    vectorSource.clear();</pre><pre>    vectorSource.addFeatures(formatter.readFeatures(data, {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'}));</pre><pre>    map.getView().fit(vectorSource.getExtent(), map.getSize());</pre><pre>  });</pre><pre>}</pre><pre>function postColl() {</pre><pre>  makeRequest('POST', '/v1/collections/coll', function(err, data) {</pre><pre>    console.log(err, data);</pre><pre>  });</pre><pre>}</pre>
+                    </div>
+                    <p>The makeRequest function allows us to make requests to a server which makes use of an inbuilt functionality of HTML5 called XMLHttpRequest. We can set the type of request (GET, POST, PUT...), the URL to send it to and the function to call when the request has finished.</p>
+                    <p>The onreadystatechange listener here is firing the provided callback only when the request is in the DONE state and either sends back the response as the first or second argument depending on whether the request was successful or not.</p>
+                    <p>The <code>getColl()</code> and <code>postColl()</code> functions call the makeRequest helper function with GET or POST to a fixed collection name in the IMS collections API. The GET call will then clear the map and add features to it based on what was returned as the collection data.</p>
+                    <p>Now that we are making our call to our IMS we need to write a server to route these calls correctly and to avoid complexities around Cross Origin Resource Sharing (CORS) that occur when trying to make calls to Predix directly from the browser.</p>
+                    <p>To do this we use Express to enhance the basic Node.js server, create a new file called <i>server.js</i> in the working directory and add the following code:</p>
+                    <div class="code"><pre>const express = require('express');</pre><pre>const app = express();</pre><pre>const fs = require('fs');</pre><pre>const Promise = require('bluebird');</pre><pre>const request = Promise.promisify(require('request'));</pre><pre>const listenPort = process.env.PORT || 3010;</pre><pre>//These will have to be filled in based on the enviroment settings of your IMS instance.</pre><pre>//The user/client will have to be created and setup via your UAA as per the Docs.</pre><pre>const user = 'client';</pre><pre>const pass = 'pass';</pre><pre>const uaaUrl = 'https://&lt;your-uaa-instance&gt;.predix-uaa.run.asv-pr.ice.predix.io';</pre><pre>const imsUrl = 'https://&lt;your-ims-instance&gt;.run.asv-pr.ice.predix.io/';</pre><pre>const zoneID = '&lt;your-uaa-instance-zone-id&gt;';</pre><pre>app.use(express.static(__dirname));</pre>
+                    </div>
+                    <p>This code is:</p>
+                    <ul>
+                        <li value="1">Getting Node.js to load dependencies</li>
+                        <li value="2">Promisifing the request library so that it can return promises</li>
+                        <li value="3">Setting a port to listen on localhost</li>
+                        <li value="4">Setting up Predix related variables and serving up the current directory</li>
+                    </ul>
+                    <p>When we want to make a call to IMS we need to provide a Bearer token in the headers to show that we are an authenticated client and that the UAA agrees that we are allowed to access the instance. We can get this token using the following code which we will append to the <i>server.js</i> file:</p>
+                    <div class="code"><pre>function getToken(user, pass, callback) {</pre><pre>  var options = {</pre><pre>    url: uaaUrl + '/oauth/token',</pre><pre>    method: 'POST',</pre><pre>    auth: {</pre><pre>      user: user,</pre><pre>      pass: pass</pre><pre>    },</pre><pre>    form: {</pre><pre>      'grant_type': 'client_credentials'</pre><pre>    },</pre><pre>    json: true</pre><pre>  };</pre><pre>  request(options, function (error, res) {</pre><pre>    if (error) {</pre><pre>      console.log('Problem with token request', error);</pre><pre>    } else {</pre><pre>      callback(res.body);</pre><pre>    }</pre><pre>  });</pre><pre>}</pre>
+                    </div>
+                    <p>This makes use of the Request library to make an HTTP request to the UAA instance and set the Authentication header to include basic authentication (using the supplied username and password, which in our case is the client and client secret). When the request succeeds, the callback is triggered with the response body sent through as data and this body contains the bearer token that we want.</p>
+                    <p>Now we can append code to the <i>server.js</i> file to intercept POST requests that the client is making to IMS and, after generating a token, send the request from the Express server:</p>
+                    <div class="code"><pre>app.post('/v1/collections/:name', function(req, res) {</pre><pre>  getToken(user, pass, function(result) {</pre><pre>    Promise.coroutine(function*() {</pre><pre>      const response = yield request({</pre><pre>        url: `${imsUrl}v1/collections/${req.params.name}`,</pre><pre>        method: 'POST',</pre><pre>        headers: {</pre><pre>          'Content-type': 'application/json',</pre><pre>          'Authorization': 'Bearer ' + result.access_token,</pre><pre>          'Predix-Zone-Id': zoneID,</pre><pre>          'X-Subtenant-Id': zoneID</pre><pre>        },</pre><pre>        body: fs.readFileSync('collection.geojson', 'utf-8')  //replace with req.body if file loading is done client side.</pre><pre>      });</pre><pre>      res.status(response.statusCode).json(response.body);</pre><pre>    })();</pre><pre>  });</pre><pre>});</pre>
+                    </div>
+                    <p>This will catch any client POST requests to <i>/v1/collections/*</i> and cause the server to send the request here instead.</p>
+                    <p>This makes use of promises, generators and yielding functions which are complex and don’t need to be explained for the purpose of this guide. The main thing to note is that a request is made to the imsURL that was set above with the extra path of <i>/v1/collections/&lt;name-of-collection&gt;</i>. This request has certain headers set that are needed when talking to IMS  (for further details see <a href="AddingServicesToApplication.htm#Ensuring_client_apps_can_access_Intelligent_mapping_data" target="_blank" class="MCXref xref" xrefformat="{paratext}">Ensuring client apps can access Intelligent mapping data</a>).</p>
+                    <p>Next append code to the <i>server.js</i> file to intercept the GET requests that the client makes to IMS:</p>
+                    <div class="code"><pre>app.get('/v1/collections/:name', function(req, res) {</pre><pre>  getToken(user, pass, function(result) {</pre><pre>    Promise.coroutine(function*() {</pre><pre>      const response = yield request({</pre><pre>        url: `${imsUrl}v1/collections/${req.params.name}`,</pre><pre>        method: 'GET',</pre><pre>        headers: {</pre><pre>          'Authorization': 'Bearer ' + result.access_token,</pre><pre>          'Predix-Zone-Id': zoneID,</pre><pre>          'X-Subtenant-Id': zoneID,</pre><pre>          'Connection': 'keep-alive'</pre><pre>        },</pre><pre>        json: true</pre><pre>      });</pre><pre>      res.status(response.statusCode).json(response.body);</pre><pre>    })();</pre><pre>  });</pre><pre>});</pre>
+                    </div>
+                    <p>As you can see this is very similar to the POST code, however it makes a GET request and doesn’t send a body.</p>
+                    <p>Finally, append code to the <i>server.js</i> file to make our server listen on the port that we set earlier:</p>
+                    <div class="code"><pre>app.listen(listenPort, function () {</pre><pre>  console.log('Server listening on port ' + listenPort);</pre><pre>});</pre>
+                    </div>
+                    <p>We also log the port to the server output for convenience.</p>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Starting the Server</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <p>Now we have finished adding the code, we can run the server in the command line in the working directory:</p><pre xml:space="preserve">node server.js</pre>
+                    <p>You should see the following output:</p><pre xml:space="preserve">Server listening on port 3010</pre>
+                </div>
+            </div>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Viewing the assets on the map</a></span>
+                <div class="MCDropDownBody dropDownBody">
+                    <ol>
+                        <li value="1">Open a web browser and enter a URL of <code>localhost:3010</code>.</li>
+                        <li value="2">Click the <b>Post collection</b> button.</li>
+                        <li class="continuation">The upload will take a few seconds to complete and then the developer console will show a completion message. </li>
+                        <li value="3">Click the <b>Get collection</b> button.</li>
+                        <li class="continuation">The data will be retrieved from your IMS instance and will be displayed on the map.</li>
+                    </ol>
+                    <p class="Note">The data will only have to be posted once. If you shut the web page or restart the server, the data will still exist in IMS and can be displayed by clicking the <b>Get collection</b> button. Additional data can still be posted but it will be appended to the existing collection.</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

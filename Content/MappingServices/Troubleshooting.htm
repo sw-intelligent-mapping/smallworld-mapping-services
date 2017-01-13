@@ -28,7 +28,7 @@
         </script>
     </head>
     <body>
-        <div class="header"><a name="kanchor15"></a>
+        <div class="header"><a name="kanchor17"></a>
             <h1>Troubleshooting errors</h1>
             <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
         </div>
@@ -48,7 +48,7 @@
                             <p class="sw_footer_title">Troubleshooting errors</p>
                         </td>
                         <td>
-                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
+                            <p class="sw_update"><a href="#" onclick="javascript: window.location.href ='mailto:swdocs@ge.com?subject=(Predix) Feedback on article: '+document.title;" class="sw_copyright" title="Send feedback on this article">Send feedback</a>
                             </p>
                         </td>
                         <td>
@@ -74,12 +74,12 @@
                     <li value="2">Predix-Zone-Id</li>
                     <li value="3">X-Subtenant-Id</li>
                 </ul>
-                <li value="2">The specified Predix-Zone-Id has got the scope and authorization for the services you are trying to use , for example <code>intelligent-mapping.zones.&lt;predix-zone-id&gt;.user</code></li>
-                <li value="3">The UAA you are using as the trustedIssuerIds has been specified correctly when the service instance was created, that is <code>-c'{"trustedIssuerIds":["https://…../oauth/token"]}'</code></li>
-                <li value="4">The term "Bearer" in the authorization header is case sensitive.</li>
+                <li value="2">The term “Bearer” in the authorization header has the correct case (it is case-sensitive).</li>
+                <li value="3">The specified Predix-Zone-Id has got the scope and authorization for the services you are trying to use , for example <code>intelligent-mapping.zones.&lt;predix-zone-id&gt;.user</code></li>
+                <li value="4">The UAA you are using as the trustedIssuerIds has been specified correctly when the service instance was created, that is <code>-c'{"trustedIssuerIds":["https://…../oauth/token"]}'</code></li>
             </ul>
-            <h3>400	Errors</h3>
-            <p>If you get a 400 error when posting GeoJSON to Intelligent Mapping, check that the GeoJSON is valid.</p>
+            <h3>400 Errors</h3>
+            <p>If you get a 400 error code when posting GeoJSON to Intelligent Mapping, check that the GeoJSON is valid.</p>
         </div>
     </body>
 </html>
