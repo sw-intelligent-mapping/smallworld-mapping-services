@@ -506,14 +506,14 @@ a.MCToggler_Open.MCTogglerHotSpot
 	/* IE10+ */
 	/* W3C */
 	/*PIE*/
-	background: #ececec url('Images/expand.png') no-repeat center center;
-	background: url('Images/expand.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/expand.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
-	background: url('Images/expand.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/expand.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/expand.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/expand.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
-	-pie-background: url('Skins/Default/Stylesheets/Images/expand.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+	background: #ececec url('Images/plus_16x16.png') no-repeat center center;
+	background: url('Images/plus_16x16.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/plus_16x16.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
+	background: url('Images/plus_16x16.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/plus_16x16.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/plus_16x16.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/plus_16x16.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
+	-pie-background: url('Skins/Default/Stylesheets/Images/plus_16x16.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
 	box-shadow: 0px 1px 0px #ffffff;
 	-webkit-box-shadow: 0px 1px 0px #ffffff;
 	-moz-box-shadow: 0px 1px 0px #ffffff;
@@ -530,14 +530,14 @@ a.MCToggler_Open.MCTogglerHotSpot
 	/* IE10+ */
 	/* W3C */
 	/*PIE*/
-	background: #ececec url('Images/collapse.png') no-repeat center center;
-	background: url('Images/collapse.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/collapse.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
-	background: url('Images/collapse.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/collapse.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/collapse.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/collapse.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
-	-pie-background: url('Skins/Default/Stylesheets/Images/collapse.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+	background: #ececec url('Images/minus_16x16.png') no-repeat center center;
+	background: url('Images/minus_16x16.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/minus_16x16.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
+	background: url('Images/minus_16x16.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/minus_16x16.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/minus_16x16.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/minus_16x16.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
+	-pie-background: url('Skins/Default/Stylesheets/Images/minus_16x16.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
 	box-shadow: 0px 1px 0px #ffffff;
 	-webkit-box-shadow: 0px 1px 0px #ffffff;
 	-moz-box-shadow: 0px 1px 0px #ffffff;
@@ -554,14 +554,14 @@ a.MCToggler_Open.MCTogglerHotSpot
 	/* IE10+ */
 	/* W3C */
 	/*PIE*/
-	background: #ececec url('Images/printer.png') no-repeat center center;
-	background: url('Images/printer.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/printer.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
-	background: url('Images/printer.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/printer.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/printer.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/printer.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
-	-pie-background: url('Skins/Default/Stylesheets/Images/printer.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+	background: #ececec url('Images/Print.png') no-repeat center center;
+	background: url('Images/Print.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/Print.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
+	background: url('Images/Print.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/Print.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/Print.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/Print.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
+	-pie-background: url('Skins/Default/Stylesheets/Images/Print.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
 	box-shadow: 0px 1px 0px #ffffff;
 	-webkit-box-shadow: 0px 1px 0px #ffffff;
 	-moz-box-shadow: 0px 1px 0px #ffffff;
@@ -578,14 +578,14 @@ a.MCToggler_Open.MCTogglerHotSpot
 	/* IE10+ */
 	/* W3C */
 	/*PIE*/
-	background: #ececec url('Images/highlight.png') no-repeat center center;
-	background: url('Images/highlight.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/highlight.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
-	background: url('Images/highlight.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
-	background: url('Images/highlight.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/highlight.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
-	background: url('Images/highlight.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
-	-pie-background: url('Skins/Default/Stylesheets/Images/highlight.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
+	background: #ececec url('Images/RemoveHighlight_16x16.png') no-repeat center center;
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#ececec));
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, -webkit-linear-gradient(top, #ffffff 0%, #ececec 100%);
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, -o-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, -ms-linear-gradient(top, #ffffff 0%,#ececec 100%);
+	background: url('Images/RemoveHighlight_16x16.png') no-repeat center center, linear-gradient(top, #ffffff 0%,#ececec 100%);
+	-pie-background: url('Skins/Default/Stylesheets/Images/RemoveHighlight_16x16.png') no-repeat center center, linear-gradient(#ffffff, #ececec);
 	box-shadow: 0px 1px 0px #ffffff;
 	-webkit-box-shadow: 0px 1px 0px #ffffff;
 	-moz-box-shadow: 0px 1px 0px #ffffff;
