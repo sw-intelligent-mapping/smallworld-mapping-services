@@ -174,121 +174,147 @@
 
 
 	<div class="cell">
-		<div class="heading CS_post"><b>Add a Collection</b></div>
+		<div class="heading CS_post"><b>Add a collection</b></div>
 		<div class="content">
 			POST ..v1/collections/transformers</br>
 			BODY</br>
-			&nbsp;&nbsp;GeoJSON FeatureCollection</br>
+			{"type":"FeatureCollection","features":[{</br>
+			&nbsp;&nbsp;"type": "Feature","id":"TX001","properties": {"amenity":"Doctor"},</br>
+			&nbsp;&nbsp;"geometry": {"type": "LineString",</br>
+			&nbsp;&nbsp;"coordinates": [[2.109375,45.1510532655634],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[5.712890625,43.45291889355465],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[7.03125,42.68243539838623]</br>
+			&nbsp;&nbsp;]}}]</br>
+			}</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading CS_post"><b>Add a Feature to a Collection</b></div>
+		<div class="heading CS_post"><b>Add a feature to a collection</b></div>
 		<div class="content">
-			POST ..v1/collections/transformers/features/TX002</br>
+			POST ..v1/collections/transformers/features?id=TX002</br>
 			BODY</br>
-			&nbsp;&nbsp;GeoJSON FeatureCollection</br>
+			{"type": "Feature","id":"TX002","properties": {"amenity":"Dentist"},</br>
+			&nbsp;&nbsp;"geometry": {"type": "LineString",</br>
+			&nbsp;&nbsp;"coordinates": [[2.109375,45.1510532655634],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[5.712890625,43.45291889355465],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[7.03125,42.68243539838623]</br>
+			&nbsp;&nbsp;]}</br>
+			}
+</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading CS_get"><b>List all Collections</b></div>
+		<div class="heading CS_put"><b>Update a feature in a collection</b></div>
+		<div class="content">
+			PUT ..v1/collections/transformers/features?id=TX001</br>
+			BODY</br>
+			{"type": "Feature","id":"TX001",</br>
+			&nbsp;&nbsp;"properties": {"WD13NM":"Histon and Impington"},</br>
+			&nbsp;&nbsp;"geometry": {"type": "LineString",</br>
+			&nbsp;&nbsp;"coordinates": [[2.109375,45.1510532655634],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[5.712890625,43.45291889355465],</br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[7.03125,42.68243539838623]</br>
+			&nbsp;&nbsp;]}</br>
+			}
+		</div>
+	</div>
+	
+	<div class="cell">
+		<div class="heading CS_get"><b>List all collections</b></div>
 		<div class="content">
 			GET ..v1/collections</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading CS_delete"><b>Delete a Collection</b></div>
+		<div class="heading CS_delete"><b>Delete a collection</b></div>
 		<div class="content">
 			DELETE ..v1/collections/transformers</br>
 		</div>
 </div>
 
 	<div class="cell">
-		<div class="heading CS_get"><b>Get a Feature from a Collection</b></div>
+		<div class="heading CS_get"><b>Get a feature from a collection</b></div>
 		<div class="content">
-			GET ..v1/collections/transformers/features/TX001
+			GET ..v1/collections/transformers/features?id=TX001
 		</div>
 	</div>
 
+
+	
+</div>
+<div class="column2">
+
 	<div class="cell">
-		<div class="heading CS_delete"><b>Delete a Feature from a Collection</b></div>
+		<div class="heading CS_delete"><b>Delete a feature from a collection</b></div>
 		<div class="content">
-			DELETE ..v1/collections/transformers/features/TX001
+			DELETE ..v1/collections/transformers/features?id=TX001
 		</div>
 </div>
 
 	<div class="cell">
-		<div class="heading CS_put"><b>Update a Feature in a Collection</b></div>
-		<div class="content">
-			PUT ..v1/collections/transformers/features/TX001</br>
-			BODY</br>
-			GeoJSON featureCollection
-		</div>
-	</div>
-
-	<div class="cell">
-		<div class="heading CS_get"><b>Cluster the Features witin a Collection</b></div>
+		<div class="heading CS_get"><b>Cluster the features within a collection</b></div>
 		<div class="content">
 			GET ..v1/collections/transformers/cluster?
    zoomLevel=15&left=0&right=4&bottom=46&top=50
 		</div>
 </div>
-	
-</div>
-<div class="column2">
-
-
 
 	<div class="cell">
-		<div class="heading CS_get"><b>Get all features in a Collection</b></div>
+		<div class="heading CS_get"><b>Get all features in a collection</b></div>
 		<div class="content">
 			GET ..v1/collections/transformers</br>
 		</div>
 	</div>
 
 	<div class="cell">
-		<div class="heading CS_get"><b>Find all Features in a Collection within a bounding box</b></div>
+		<div class="heading CS_get"><b>Find all features in a collection within a bounding box</b></div>
 		<div class="content">
 				GET /v1/collections/transformers/spatial-query/bbox-interacts?left=0&right=4&bottom=46&top=50
 		</div>
 	</div>
 	
 	<div class="cell">
-		<div class="heading CS_post"><b>Get all Features within an Area</b></div>
+		<div class="heading CS_post"><b>Get all point features within an area</b></div>
 		<div class="content">
 			POST ..v1/collections/tranformers/spatial-query?operator=within</br>
 			BODY</br>
-			{</br>
-			"geometry": {</br>
-			GeoJSON polygon</br>
-			   }</br>
+			{"geometry":<br>
+			&nbsp;&nbsp;{"type": "Polygon","coordinates": [[<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.452117919921875,46.5441628418975],<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.481042861938477,46.546051895137865],<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.483617782592772,46.51705950058313],<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.460100173950195,46.5165279273188],<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.468168258666992,46.531232869403546],<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;[10.452117919921875,46.5441628418975]<br>
+			&nbsp;&nbsp;]]}</br>
 			}
 		</div>
 	</div>	
 	
 	<div class="cell">
-		<div class="heading CS_get"><b>Find all Features in a Collection that match a search term</b></div>
+		<div class="heading CS_get"><b>Find all features in a collection that match a search term</b></div>
 		<div class="content">
-				GET ..v1/collections/transformers/Text?q=overloaded
+				GET ..v1/collections/transformers/text?q=overloaded
 		</div>
 	</div>
 	
 	<div class="cell">
-		<div class="heading CS_post"><b>Get Nearest Feature in a Collection</b></div>
+		<div class="heading CS_post"><b>Get nearest point feature in a collection</b></div>
 		<div class="content">
 			POST ..v1/collections/tranformers/spatial-query?operator=nearest</br>
 			BODY</br>
 			{</br>
-			"longitude": -1,</br>
-			"latitude": 50</br>
+			&nbsp;&nbsp;"longitude": -1,</br>
+			&nbsp;&nbsp;"latitude": 50</br>
 			}
 		</div>
 	</div>	
 
 		<div class="cell">
-		<div class="heading CS_get"><b>count the number of Features in a Collection</b></div>
+		<div class="heading CS_get"><b>Count the number of features in a collection</b></div>
 		<div class="content">
 				GET ..v1/collections/transformers/collectionSize
 		</div>
