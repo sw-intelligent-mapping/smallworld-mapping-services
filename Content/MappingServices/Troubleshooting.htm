@@ -11,7 +11,7 @@
         <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" type="text/css" data-mc-generated="True" />
         <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" type="text/css" data-mc-generated="True" /><title>Troubleshooting errors</title>
         <link href="../Resources/Stylesheets/swStyles.css" rel="stylesheet" />
-        <meta name="description" content="This article describes how you can access developer examples showing how to apply the Intelligent Mapping services to an OpenLayers 3 map. Smallworld Intelligent Mapping Services" />
+        <meta name="description" content="This article provides information on how to deal with errors returned during Predix development. Intelligent Mapping and Dynamic Mapping Services." />
         <script src="../../Resources/Scripts/custom.modernizr.js" type="text/javascript">
         </script>
         <script src="../../Resources/Scripts/jquery.min.js" type="text/javascript">
@@ -62,7 +62,7 @@
             <p>This article provides troubleshooting for some of the errors you may encounter during Predix development.</p>
             <h3>502	Errors</h3>
             <p>A “Server error, status code: 502” error could be returned when creating a service instance, for example:</p>
-            <div class="code"><pre xml:space="preserve">Server error, status code: 502, error code: 10001, message: </pre><pre xml:space="preserve">The service broker returned an invalid response for the request to </pre><pre xml:space="preserve">https://intelligent-mapping-service-broker-prod.run.asv-pr.ice.predix.io/v2/service_instances/0a0f7219-5726-474e-99aa-e6632b6143b3?accepts_incomplete=true. </pre><pre xml:space="preserve">Status Code: 500 Internal Server Error, Body: Internal Server Error</pre>
+            <div class="code"><pre xml:space="preserve">Server error, status code: 502, error code: 10001, message: </pre><pre xml:space="preserve">The service broker returned an invalid response for the request to </pre><pre xml:space="preserve">https://intelligent-mapping-service-broker-prod.run.aws-usw02-pr.ice.predix.io/v2/service_instances/0a0f7219-5726-474e-99aa-e6632b6143b3?accepts_incomplete=true. </pre><pre xml:space="preserve">Status Code: 500 Internal Server Error, Body: Internal Server Error</pre>
             </div>
             <p>This  likely cause of this error is <b>trustedIssuerIds</b> not being specified during the creation of the service instance.</p>
             <h3>401	Errors</h3>
