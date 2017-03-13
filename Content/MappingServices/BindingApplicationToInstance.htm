@@ -64,22 +64,45 @@
             <p>Cloud Foundry runtime uses the VCAP_SERVICES environment variable to communicate with a deployed application about its environment. To provision connection details for your service instance in the VCAP_SERVICES environment variable, you must bind your instance to your application.</p>
             <h3>Procedure</h3>
             <ol>
-                <li value="1">Bind your application to the service instance by entering the following command:</li>
+                <li value="1">	Create an application that uses the mapping service.</li>
+                <li value="2">Create a <i>manifest.yml</i> text file  in the same directory as your application. In this file set the name of your web application as follows:</li>
+                <li class="continuation">
+                    <div class="code"><pre>#</pre><pre>applications:</pre><pre>- name:</pre><pre>&lt;YourAppName&gt;</pre>
+                    </div>
+                </li>
+                <li value="3">Push the application to Cloud Foundry. At the command prompt enter:</li>
+                <li class="code">cf push</li>
+                <li value="4">Check that your web application is listed in your Cloud Foundry space:</li>
+                <li class="code">cf apps</li>
+                <li value="5">Bind your application to the service instance by entering the following command:</li>
                 <li class="code">cf bind-service &lt;your_app_name&gt; &lt;my_service_instance_name&gt;</li>
-                <li class="continuation">Your application is bound to the <code>&lt;my_service_instance_name&gt;</code> instance, and Cloud Foundry returns the following message:</li>
+                <li class="continuation">For example:</li>
+                <li class="code">cf bind-service my-web-app example-ims</li>
+                <li class="continuation">Your application is bound to the <code>&lt;my_service_instance_name&gt;</code> instance, and Cloud Foundry returns the a confirmation message. For example:</li>
                 <li class="continuation">
                     <div class="code"><pre>Binding service &lt;my_service_instance_name&gt; to app &lt;your_app_name&gt; in org myorg / space predix as userx@ge.com...</pre><pre>OK</pre>
                     </div>
                 </li>
-                <li class="continuation"><b>Tip:</b> Use the cf restage command to make sure your environmental variable changes take effect.</li>
-                <li value="2">Enter the following command to verify the binding:</li>
+                <li class="continuation">
+                    <p class="Tip">Use the<code> cf restage</code> command to make sure your environmental variable changes take effect.</p>
+                </li>
+                <li value="6">Enter the following command to verify the binding:</li>
                 <li class="code">cf env &lt;your_app_name&gt;</li>
-                <li class="continuation">A message similar to the following is returned.</li>
-                <li class="continuation">The <b>VCAP_SERVICES</b> provides the oauth-scope.</li>
-                <li class="continuation">The <b>predix-uaa</b> section provides the "<code>uri": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io</code>", which is used when logging in to the Predix Starter Kit.</li>
+                <li class="continuation">A message similar to the following is returned:</li>
+                <li class="continuation">
+                    <div class="code"><pre>Getting env variables for app your_app_name in org cf_org_name / space cf_space_name as cf_user_name...</pre><pre>OK</pre><pre>{</pre><pre> "VCAP_SERVICES": {</pre><pre>  "intelligent-mapping": [</pre><pre>   {</pre><pre>    "credentials": {</pre><pre>     "instanceId": "69c2bd61-4526-4379-9533-a2721fe83ba8",</pre><pre>     "uri": "http://&lt;production URL&gt;",</pre><pre>     "zone": {</pre><pre>      "http-header-name": "Predix-Zone-Id",</pre><pre>      "http-header-value": "69c2bd61-4526-4379-9533-a2721fe83ba8",</pre><pre xml:space="preserve">      "oauth-scope": "intelligent-mapping.zones.69c2bd61-4526-4379-9533-a2721fe83ba8.user"</pre><pre>     }</pre><pre>    },</pre><pre>    "label": "intelligent-mapping",</pre><pre>    "name": "&lt;service instance name&gt;",</pre><pre xml:space="preserve">    "plan": "Tiered",</pre><pre>    "tags": []</pre><pre>   }</pre><pre>  ]</pre><pre> }</pre><pre>}</pre><pre> "predix-uaa": [</pre><pre>   {</pre><pre>    "credentials": {</pre><pre>     "issuerId": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token",</pre><pre>     "uri": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io",</pre><pre>     "zone": {</pre><pre>      "http-header-name": "X-Identity-Zone-Id",</pre><pre>      "http-header-value": "a14f01fc-f50e-4db7-8bb0-bed1c887ea98"</pre><pre>     }</pre><pre>    },</pre><pre>    "label": "predix-uaa",</pre><pre>    "name": "my_uaa_instance",</pre><pre>    "plan": "Tiered",</pre><pre>    "provider": null,</pre><pre>    "syslog_drain_url": null,</pre><pre>    "tags": []</pre><pre>   }</pre><pre>  ]</pre><pre> }</pre><pre>}</pre>
+                    </div>
+                </li>
+                <li class="continuation">
+                    <div class="notes">
+                        <ul>
+                            <li value="1">The <i>&lt;production URL&gt;</i> depends on your Predix.io registration, that is <i>aws-usw02-.pr.ice.predix.io</i> for US West or <i>asv-.pr.ice.predix.io</i> for US East.</li>
+                            <li value="2">The <b>VCAP_SERVICES</b> provides the oauth-scope.</li>
+                            <li value="3">The <b>predix-uaa</b> section provides the "<code>uri": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io</code>", which is used when logging in to the Predix Starter Kit.</li>
+                        </ul>
+                    </div>
+                </li>
             </ol>
-            <div class="code"><pre>Getting env variables for app your_app_name in org cf_org_name / space cf_space_name as cf_user_name...</pre><pre>OK</pre><pre>{</pre><pre> "VCAP_SERVICES": {</pre><pre>  "intelligent-mapping": [</pre><pre>   {</pre><pre>    "credentials": {</pre><pre>     "instanceId": "69c2bd61-4526-4379-9533-a2721fe83ba8",</pre><pre>     "uri": "http://&lt;production URL&gt;",</pre><pre>     "zone": {</pre><pre>      "http-header-name": "Predix-Zone-Id",</pre><pre>      "http-header-value": "69c2bd61-4526-4379-9533-a2721fe83ba8",</pre><pre xml:space="preserve">      "oauth-scope": "intelligent-mapping.zones.69c2bd61-4526-4379-9533-a2721fe83ba8.user"</pre><pre>     }</pre><pre>    },</pre><pre>    "label": "intelligent-mapping",</pre><pre>    "name": "&lt;service instance name&gt;",</pre><pre xml:space="preserve">    "plan": "Tiered",</pre><pre>    "tags": []</pre><pre>   }</pre><pre>  ]</pre><pre> }</pre><pre>}</pre><pre> "predix-uaa": [</pre><pre>   {</pre><pre>    "credentials": {</pre><pre>     "issuerId": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token",</pre><pre>     "uri": "https://a14f01fc-f50e-4db7-8bb0-bed1c887ea98.predix-uaa.run.aws-usw02-pr.ice.predix.io",</pre><pre>     "zone": {</pre><pre>      "http-header-name": "X-Identity-Zone-Id",</pre><pre>      "http-header-value": "a14f01fc-f50e-4db7-8bb0-bed1c887ea98"</pre><pre>     }</pre><pre>    },</pre><pre>    "label": "predix-uaa",</pre><pre>    "name": "my_uaa_instance",</pre><pre>    "plan": "Tiered",</pre><pre>    "provider": null,</pre><pre>    "syslog_drain_url": null,</pre><pre>    "tags": []</pre><pre>   }</pre><pre>  ]</pre><pre> }</pre><pre>}</pre>
-            </div>
             <p><b>Next Step</b>
             </p>
             <p><a href="UpdatingOAuth2ClientToUseInstance.htm" class="MCXref xref" xrefformat="{paratext}">Updating OAuth2 client to use your service instance</a>

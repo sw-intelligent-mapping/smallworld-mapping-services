@@ -53,7 +53,7 @@
                             </p>
                         </td>
                         <td>
-                            <p class="sw_update">Last update: 31st May 2016</p>
+                            <p class="sw_update">Last update: 9th March 2017</p>
                         </td>
                     </tr>
                 </tbody>
@@ -62,8 +62,7 @@
         <div class="article">
             <h3>Before you begin</h3>
             <p>A UAA service instance must be already configured as your trusted issuer.</p>
-            <p class="Note">The following steps are performed using the Cloud Foundry CLI. To complete the steps in a web browser, follow the instructions on the service page in the Predix Catalog.</p>
-            <h3>Procedure</h3>
+            <h3>Creating a mapping service instance using the Cloud Foundry CLI</h3>
             <ol>
                 <li value="1">List the services in the Cloud Foundry marketplace</li>
                 <li class="code">cf marketplace</li>
@@ -71,8 +70,15 @@
                 <li class="continuation">
                     <p class="note">This example uses intelligent-mapping, but the steps are the same for dynamic-mapping.</p>
                 </li>
-                <li value="2">Create a service instance</li>
-                <li class="code">cf create-service intelligent-mapping &lt;plan&gt; &lt;my_service_instance_name&gt; -c '{"trustedIssuerIds":["&lt;my_uaa_instance_issuerId&gt;", "&lt;my_uaa_instance2_issuerId&gt;"]}'</li>
+                <li value="2">Create a service instance using one of the following:</li>
+                <ul>
+                    <li value="1">UNIX:</li>
+                    <li class="code">cf create-service intelligent-mapping &lt;plan&gt; &lt;my_service_instance_name&gt; -c '{"trustedIssuerIds":["&lt;my_uaa_instance_issuerId&gt;", "&lt;my_uaa_instance2_issuerId&gt;"]}'</li>
+                    <li value="2">Windows:</li>
+                    <li class="code">
+                        cf create-service intelligent-mapping &lt;plan&gt; &lt;my_service_instance_name&gt; -c "{\"trustedIssuerIds\":[\"&lt;my_uaa_instance_issuerId&gt;\", \"&lt;my_uaa_instance2_issuerId&gt;\"]}"
+                    </li>
+                </ul>
                 <li class="continuation">Where:</li>
                 <li class="continuation">
                     <table style="width: 100%;mc-table-style: url('../Resources/TableStyles/swStripedTable.css');" class="TableStyle-swStripedTable" cellspacing="0">
@@ -92,15 +98,29 @@
                             <tr class="TableStyle-swStripedTable-Body-Body1">
                                 <td class="TableStyle-swStripedTable-BodyB-Column1-Body1">&lt;my_uaa_instance_issuerId&gt;</td>
                                 <td class="TableStyle-swStripedTable-BodyA-Column1-Body1">
-                                    The issuerID (base URL) of your trusted issuer (UAA instance). For example, <b>https://13fa0384-9e2a-48e2-9d06-2c95a1f4f5ea.&lt;productionurl&gt;/oauth/token</b>. After you have bound the UAA instance to your application, you can retrieve the URI from the VCAP_SERVICES environment variable. If applicable, you can use a comma-delimited format to specify multiple trusted issuers (UAA instances), such as <code> ["&lt;my_uaa_instance1_issuerId&gt;", "&lt;my_uaa_instance2_issuerId&gt;"]</code>.
+                                    The issuerID (base URL) of your trusted issuer (UAA instance). For example, <b>https://13fa0384-9e2a-48e2-9d06-2c95a1f4f5ea.&lt;productionurl&gt;/oauth/token</b>. After you have bound the UAA instance to your application, you can retrieve the URI from the VCAP_SERVICES environment variable. If applicable, you can use a comma-delimited format to specify multiple trusted issuers (UAA instances), such as <code>["&lt;my_uaa_instance1_issuerId&gt;", "&lt;my_uaa_instance2_issuerId&gt;"]</code>. 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </li>
-                <li class="continuation">Cloud Foundry displays a message confirming that the service instance has been created.</li>
+                <li class="continuation">UNIX example:</li>
+                <li class="code">cf create-service intelligent-mapping Tiered example-ims -c '{"trustedIssuerIds":["https://13fa0384-9e2a-48e2-9d06-2c95a1f4f5ea.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token", "https://7c6f4184-6baa-4946-8d44-06c16b6c7646.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token"]}'</li>
+                <li class="continuation">Windows example:</li>
+                <li class="code">cf create-service intelligent-mapping Tiered example-ims –c "{\"trustedIssuerIds\":[\"https://13fa0384-9e2a-48e2-9d06-2c95a1f4f5ea.predix-uaa.run.aws-usw02-pr.ice.predix.io/oauth/token\", \"https://7c6f4184-6baa-4946-8d44-06c16b6c7646.predix-uaa.run. aws-usw02-pr.ice.predix.io/oauth/token\"]}"</li>
+                <li class="continuation">
+                    <p class="Note"> Trusted issuer IDs may vary dependant on Predix.io registration. In the above examples, the UAA was created with a Predix.io registration on Predix US West.</p>
+                </li>
+                <li value="3">Cloud Foundry displays a message confirming that the service instance has been created.</li>
             </ol>
-            <p class="Note">Cloud Foundry CLI syntax can differ between the Windows and Linux operating systems. See the Cloud Foundry help for the correct syntax for your OS.</p>
+            <h3>Creating a mapping service instance using a web browser</h3>
+            <ol>
+                <li value="1">Sign in to your Predix cloud account at Predix.io.</li>
+                <li value="2">From the Predix catalog, choose either Intelligent Mapping or Dynamic Mapping.</li>
+                <li value="3">Click on the <b>Subscribe</b> button for the tiered plan.<ul><li value="1">Select the <b>Org</b> and <b>Space</b> for your UAA</li><li value="2">Select the <b>UAA</b> <![CDATA[ ]]></li><li value="3">Fill out the <b>Service instance name</b> field with name you are planning to give to this service instance</li><li value="4">Enter <b>Service plan</b> of <i>Tiered</i></li></ul></li>
+                <li value="4">Click <b>Create Service</b>.</li>
+                <li value="5">A new page will provide details of the newly created service.</li>
+            </ol>
             <p><b>Next step:</b>
             </p>
             <p>See: <a href="BindingApplicationToInstance.htm" class="MCXref xref">Binding an application to a service instance</a></p>
