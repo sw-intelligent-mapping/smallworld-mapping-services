@@ -194,7 +194,8 @@
 			{ </br>
 			"location":[0.1186273,52.2404057], </br>
 			"timestamp": "2016-11-14T10:20:50.52Z", </br>
-			"retain_history": false </br>
+			"retain_history": false, </br>
+			"meta_data": {"class": "heavy", "type": "tank truck", "colour": "red"} </br>
 			}
 		</div>
 	</div>
@@ -211,7 +212,7 @@
 		<div class="content">
 			GET ..v1/collections
 		</div>
-</div>
+    </div>
 
 	<div class="cell">
 		<div class="heading CS_get"><b>Get a List of all Assets in a Collection</b></div>
@@ -225,10 +226,16 @@
 		<div class="content">
 			DELETE ..v1/collections/trucks
 		</div>
-</div>
+    </div>
+
+	<div class="cell">
+		<div class="heading CS_delete"><b>Delete an Asset and All of its Locations</b></div>
+		<div class="content">
+			DELETE ..v1/collections/trucks/assets/truck01
+		</div>
+	</div>
 
 
-	
 </div>
 <div class="column2">
 
@@ -273,15 +280,21 @@
 			}</br>
 			}
 		</div>
-	</div>	
-	
+	</div>
+
 	<div class="cell">
-		<div class="heading CS_delete"><b>Delete an Asset and All of its Locations</b></div>
+		<div class="heading CS_get"><b>Find all assets in a collection within a bounding box</b></div>
 		<div class="content">
-				DELETE ..v1/collections/trucks/assets/truck01
+			GET ..v1/collections/trucks/spatial-query/bbox-interacts?left=0&right=4&bottom=46&top=50
 		</div>
 	</div>
-	
+
+	<div class="cell">
+		<div class="heading CS_get"><b>Cluster assets within a collection</b></div>
+		<div class="content">
+			GET ..v1/collections/trucks/cluster?left=0&right=4&bottom=46&top=50&dataQuery={"class": "heavy", "type": "tank truck"}
+		</div>
+	</div>
 
 	
 </div>

@@ -501,15 +501,22 @@ paths:
           description: Unexpected error
   '/v1/collections/{collectionName}/spatial-query':
     post:
-      summary: |
+      summary: >
         For 'within' operator - find all points within an area.
+
         For 'nearest' operator - return the nearest point to the one specified.
+
+        For 'lineIntersectsLine' - find all points of intersection between two
+        linestrings.
       description: >
         'Within' returns GeoGJSON of type FeatureCollection containing all
         GeoJSON features within the provided polygon.
 
         'Nearest' returns a FeatureCollection with the longitude and latitude of
         the nearest point.
+
+        'LineIntersectsLine' returns a FeatureCollection containing all points
+        of intersection as GeoJSON features.
       security:
         - oauth: []
       parameters:
@@ -517,13 +524,15 @@ paths:
         - $ref: '#/parameters/subtenant'
         - $ref: '#/parameters/collectionName'
         - name: operator
-          description: |
-            The type of spatial query. Can be 'within' or 'nearest'
+          description: >
+            The type of spatial query. Can be 'within', 'nearest' or
+            'lineIntersectsLine'
           required: true
           type: string
           enum:
             - within
             - nearest
+            - lineIntersectsLine
           in: query
         - name: body
           in: body
@@ -532,6 +541,9 @@ paths:
 
             For 'nearest' query - an object with longitude and latitude of the
             point.
+
+            For 'lineIntersectsLine' - an array with two string IDs of the
+            geojson linestrings
           required: true
           schema:
             $ref: '#/definitions/QueryGeometry'
@@ -547,9 +559,14 @@ paths:
         '400':
           x-predix-response: badrequest
           description: |
-            Operator was invalid
-            Request contained invalid geojson
-            Contained geoJSON has incorrect geometry
+            Caused by one or more of the following:
+            - Operator was invalid
+            - Request contained invalid geojson
+            - Contained geoJSON has incorrect geometry
+            - Request contained invalid ID
+            - ID points to geoJSON with incorrect geometry
+            - Lines overlap when trying to find intersection
+            - Ill-defined line segment - endpoints antipodal
         '404':
           x-predix-response: notfound
           description: |
@@ -651,7 +668,7 @@ paths:
           schema:
             $ref: '#/definitions/FeatureCollectionWithFeatureId'
         '400':
-          x-predix-responce: badrequest
+          x-predix-response: badrequest
           description: >
             Bad request. Required parameter zoomLevel was not supplied or the
             bounding box
@@ -1059,6 +1076,10 @@ definitions:
         type: number
       latitude:
         type: number
+      lines:
+        type: array
+        items:
+          type: string
   MapCreated:
     type: object
     properties:

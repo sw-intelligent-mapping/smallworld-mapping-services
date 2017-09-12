@@ -49,6 +49,51 @@ parameters:
       - latest
       - timeperiod
       - bbox
+  left:
+    name: left
+    description: |
+      The longitude value of the left coordinate of the bounding box.
+      Maximum value of 180, minimum -180.
+    required: true
+    type: number
+    in: query
+    maximum: 180
+    minimum: -180
+  right:
+    name: right
+    description: |
+      The longitude value of the right coordinate of the bounding box.
+      Maximum value of 180, minimum -180.
+    required: true
+    type: number
+    in: query
+    maximum: 180
+    minimum: -180
+  top:
+    name: top
+    description: |
+      The latitude value of the top coordinate of the bounding box.
+      Maximum value of 90, minimum -90.
+    required: true
+    type: number
+    in: query
+    maximum: 90
+    minimum: -90
+  bottom:
+    name: bottom
+    description: |
+      The latitude value of the bottom coordinate of the bounding box.
+      Maximum value of 90, minimum -90.
+    required: true
+    type: number
+    in: query
+    maximum: 90
+    minimum: -90
+  dataQuery:
+    name: dataQuery
+    description: Object containing key and values to match in a query.
+    in: query
+    type: string
 securityDefinitions:
   oauth:
     type: oauth2
@@ -136,6 +181,94 @@ paths:
           description: Specified collection does not exist.
         default:
           description: Unexpected error.
+  '/v1/collections/{collectionName}/spatial-query/bbox-interacts':
+    get:
+      summary: Returns collection assets in specified bounding box
+      description: >
+        Returns all assets in the specified collection whose latest location
+        exist within the specified bounding box.
+
+        The bounding box is defined by two coordinates in the EPSG:4326 (WGS84)
+        (for further details see
+
+        http://epsg.io/4326):
+
+        * left (longitude), bottom (latitude)
+
+        * right (longitude), top (latitude)
+
+        The results can be filtered by including key and value pairs to match in
+        location meta data.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/left'
+        - $ref: '#/parameters/right'
+        - $ref: '#/parameters/top'
+        - $ref: '#/parameters/bottom'
+        - $ref: '#/parameters/dataQuery'
+      tags:
+        - Query
+      responses:
+        '200':
+          x-predix-response: default
+          description: |
+            An object containing an array of location objects is returned.
+          schema:
+            $ref: '#/definitions/LocationCollection'
+        '400':
+          x-predix-response: badrequest
+          description: >
+            Missing parameter, data query is not valid JSON or data query
+            contains key or value which is
+
+            not a string or number.
+        '404':
+          x-predix-response: notfound
+          description: Collection does not exist.
+        default:
+          description: Unexpected error.
+  '/v1/collections/{collectionName}/cluster':
+    get:
+      summary: Returns clustered assets in a specified bounding box
+      description: >
+        Returns clusters of assets in the specified collection whose latest
+        location exists within the specified
+
+        bounding box. The clusters can also optionally be filtered by a single
+        key-value pair.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/subtenant'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/left'
+        - $ref: '#/parameters/right'
+        - $ref: '#/parameters/top'
+        - $ref: '#/parameters/bottom'
+        - $ref: '#/parameters/dataQuery'
+      tags:
+        - Query
+      responses:
+        '200':
+          x-predix-response: default
+          description: An object containing clusters.
+          schema:
+            $ref: '#/definitions/Clusters'
+        '400':
+          x-predix-response: badrequest
+          description: >
+            Bad request. Too many data queries were provided or bounding box was
+            invalid.
+        '404':
+          x-predix-response: notfound
+          description: Collection does not exist
+        default:
+          description: Unexpected error
   '/v1/collections/{collectionName}/assets/{assetId}':
     put:
       summary: Add an asset location into a collection.
@@ -343,6 +476,10 @@ definitions:
     pattern: '^\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(Z|\+00:00|-00:00)$'
     minLength: 1
     maxLength: 50
+  LocationMetaData:
+    description: |
+      A JSON object of keys and values
+    type: object
   LocationObject:
     description: An object containing a timestamp and a location for asset at the time.
     type: object
@@ -354,11 +491,52 @@ definitions:
         $ref: '#/definitions/Location'
       timestamp:
         $ref: '#/definitions/Timestamp'
+      meta_data:
+        $ref: '#/definitions/LocationMetaData'
   LocationObjects:
     description: An array of location objects.
     type: array
     items:
       $ref: '#/definitions/LocationObject'
+  Clusters:
+    description: An object containing cluster information for the provided collection
+    type: object
+    required:
+      - max_assets
+      - clusters
+    properties:
+      max_assets:
+        type: integer
+        minimum: 0
+      clusters:
+        type: array
+        items:
+          $ref: '#/definitions/ClusterObject'
+  ClusterObject:
+    description: >
+      An object containing the location of the cluster along with the number of
+      assets within
+
+      the cluster. The bounding_box gives the searched area for the cluster. If
+      there is
+
+      only 1 asset in the cluster, the asset_id field gives the asset id of the
+      asset.
+    type: object
+    required:
+      - assets
+      - location
+      - bounding_box
+    properties:
+      assets:
+        type: integer
+        minimum: 0
+      location:
+        $ref: '#/definitions/Location'
+      bounding_box:
+        $ref: '#/definitions/BoundingBox'
+      asset_id:
+        type: string
   CollectionObject:
     description: 'An object containing collection name, and an array of asset ids.'
     type: object
@@ -413,7 +591,38 @@ definitions:
         type: boolean
       purge_history_before:
         $ref: '#/definitions/Timestamp'
+      meta_data:
+        $ref: '#/definitions/LocationMetaData'
     required:
       - location
       - timestamp
       - retain_history
+  LocationDataWithAssetId:
+    type: object
+    description: >
+      An object containing an asset's ID along with its location, timestamp and
+      any associated metadata.
+    properties:
+      asset_id:
+        type: string
+      location:
+        $ref: '#/definitions/Location'
+      timestamp:
+        $ref: '#/definitions/Timestamp'
+      meta_data:
+        type: object
+    required:
+      - asset_id
+      - location
+      - timestamp
+  LocationCollection:
+    type: object
+    description: |
+      An object containing an array of location objects.
+    properties:
+      locations:
+        type: array
+        items:
+          $ref: '#/definitions/LocationDataWithAssetId'
+    required:
+      - locations

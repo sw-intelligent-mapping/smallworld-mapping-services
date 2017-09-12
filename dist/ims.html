@@ -241,8 +241,14 @@
 		</div>
 	</div>
 
+	<div class="cell">
+		<div class="heading CS_get"><b>Count the number of features in a collection</b></div>
+		<div class="content">
+			GET ..v1/collections/transformers/collectionSize
+		</div>
+	</div>
 
-	
+
 </div>
 <div class="column2">
 
@@ -270,7 +276,7 @@
 	<div class="cell">
 		<div class="heading CS_get"><b>Find all features in a collection within a bounding box</b></div>
 		<div class="content">
-				GET /v1/collections/transformers/spatial-query/bbox-interacts?left=0&right=4&bottom=46&top=50
+				GET ..v1/collections/transformers/spatial-query/bbox-interacts?left=0&right=4&bottom=46&top=50
 		</div>
 	</div>
 	
@@ -309,15 +315,19 @@
 			&nbsp;&nbsp;"latitude": 50</br>
 			}
 		</div>
-	</div>	
+	</div>
 
 	<div class="cell">
-		<div class="heading CS_get"><b>Count the number of features in a collection</b></div>
+		<div class="heading CS_post"><b>Get all points of intersection between two linestrings</b></div>
 		<div class="content">
-				GET ..v1/collections/transformers/collectionSize
+			POST ..v1/collections/lines/spatial-query?operator=lineIntersectsLine</br>
+			BODY</br>
+			{</br>
+			&nbsp;&nbsp;"lines": ["Line1","Line2"]</br>
+			}
 		</div>
 	</div>
-	
+
 </div>
 
 </div>
