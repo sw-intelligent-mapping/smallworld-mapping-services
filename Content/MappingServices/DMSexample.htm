@@ -28,7 +28,7 @@
         </script>
     </head>
     <body>
-        <div class="header"><a name="kanchor14"></a>
+        <div class="header"><a name="kanchor4"></a>
             <h1>Setting up a simple application using the Dynamic Mapping Service</h1>
             <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
         </div>
@@ -61,7 +61,7 @@
         <div class="article">
             <p>This article guides you through the processes involved in setting up a basic web application that uses the Dynamic Mapping Service (DMS) to display asset data on a map.</p>
             <p>This will include client side JavaScript, an Express server to route the requests to Predix and a basic HTML page.</p>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Prerequisites</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Prerequisites</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <ul>
                         <li value="1">Node.js (available from <a href="https://nodejs.org/" target="_blank">https://nodejs.org</a>)</li>
@@ -69,7 +69,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setup</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setup</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <p>Create the working directory and install the required NPM packages:</p>
                     <ol>
@@ -95,7 +95,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up JavaScript to display a map</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up JavaScript to display a map</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <p>Create a file named <i>script.js</i> in the working directory and add the following code:</p>
                     <div class="code"><pre>var map;</pre><pre>var vectorSource;</pre><pre>var formatter;</pre><pre>function init() {</pre><pre>  vectorSource = new ol.source.Vector();</pre><pre>  formatter = new ol.format.GeoJSON();</pre><pre>  var mapLayers = [</pre><pre>    new ol.layer.Tile({</pre><pre>      source : new ol.source.OSM()</pre><pre>    }),</pre><pre>    new ol.layer.Vector({</pre><pre>      source: vectorSource</pre><pre>    })</pre><pre>  ];</pre><pre>  map = new ol.Map({</pre><pre>    layers: mapLayers,</pre><pre>    target: 'map',</pre><pre>    view: new ol.View({</pre><pre>      center: ol.proj.transform([-0.083825, 52.21668333], 'EPSG:4326', 'EPSG:3857'),</pre><pre>      zoom: 14,</pre><pre>      maxZoom: 21</pre><pre>    })</pre><pre>  });</pre><pre>}</pre>
@@ -110,7 +110,7 @@
                     <p>At this point the page can be run and you should see a map centered in Cambourne in the UK.</p>
                 </div>
             </div>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up the Express Server</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Setting up the Express Server</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <p>The next step is to make the requests to DMS to allow us to PUT and GET geospatial data. GET requests will retrieve the latest location. To do this we will add more code to our <i>script.js</i> file to make requests and will start to implement an Express server.</p>
                     <p>We already have a couple of buttons on our HTML page which are calling functions when clicked so we need to write these functions. After the end of the <code>init()</code> function add the following:</p>
@@ -133,7 +133,8 @@
                     <p>When we want to make a call to DMS we need to provide a Bearer token in the headers to show that we are an authenticated client and that the UAA agrees that we are allowed to access the instance. We can get this token using the following code which we will append to the <i>server.js</i> file:</p>
                     <div class="code"><pre>function getToken(user, pass, callback) {</pre><pre>  var options = {</pre><pre>    url: uaaUrl + '/oauth/token',</pre><pre>    method: 'POST',</pre><pre>    auth: {</pre><pre>      user: user,</pre><pre>      pass: pass</pre><pre>    },</pre><pre>    form: {</pre><pre>      'grant_type': 'client_credentials'</pre><pre>    },</pre><pre>    json: true</pre><pre>  };</pre><pre>  request(options, function (error, res) {</pre><pre>    if (error) {</pre><pre>      console.log('Problem with token request', error);</pre><pre>    } else {</pre><pre>      callback(res.body);</pre><pre>    }</pre><pre>  });</pre><pre>}</pre>
                     </div>
-                    <p>This makes use of the Request library to make an HTTP request to the UAA instance and set the Authentication header to include basic authentication (using the supplied username and password, which in our case is the client and client secret). When the request succeeds, the callback is triggered with the response body sent through as data and this body contains the bearer token that we want.</p>
+                    <p>This makes use of the Request library to make an HTTP request to the UAA instance and set the Authentication header to include basic authentication (using the supplied username and password, which in our case is the client and client secret). When the request succeeds, the callback is triggered with the response body sent through as data and this body contains the Bearer token that we want.</p>
+                    <p>0</p>
                     <p>Now we can append code to the <i>server.js</i> file to intercept PUT requests that the client is making to DMS and, after generating a token, send the request from the Express server:</p>
                     <div class="code"><pre>app.put('/v1/collections/cars/assets/:name', function(req, res) {</pre><pre>  getToken(user, pass, function(result) {</pre><pre>    Promise.coroutine(function*() {</pre><pre>      const response = yield request({</pre><pre>        url: `${dmsUrl}v1/collections/cars/assets/${req.params.name}`,</pre><pre>        method: 'PUT',</pre><pre>        headers: {</pre><pre>          'Content-type': 'application/json',</pre><pre>          'Authorization': 'Bearer ' + result.access_token,</pre><pre>          'Predix-Zone-Id': zoneID,</pre><pre>          'X-Subtenant-Id': zoneID</pre><pre>        },</pre><pre>        //replace with req.body if location loading is done client side.</pre><pre>        body: JSON.stringify({location: [-0.080799, 52.217099], timestamp: "2016-11-23T15:30:00.00Z", retain_history: true})</pre><pre>      });</pre><pre>      res.status(response.statusCode).end();</pre><pre>    })();</pre><pre>  });</pre><pre>});</pre>
                     </div>
@@ -150,13 +151,13 @@
                     <p>We also log the port to the server output for convenience.</p>
                 </div>
             </div>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Starting the Server</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Starting the Server</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <p>Now we have finished adding the code, we can run the server in the command line in the working directory:</p><pre xml:space="preserve">node server.js</pre>
                     <p>You should see the following output:</p><pre xml:space="preserve">Server listening on port 3010</pre>
                 </div>
             </div>
-            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Viewing the assets on the map</a></span>
+            <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="13" width="16" alt="Closed" data-mc-alt2="Open" />Viewing the assets on the map</a></span>
                 <div class="MCDropDownBody dropDownBody">
                     <ol>
                         <li value="1">Open a web browser and enter a URL of <code>localhost:3010</code>.</li>

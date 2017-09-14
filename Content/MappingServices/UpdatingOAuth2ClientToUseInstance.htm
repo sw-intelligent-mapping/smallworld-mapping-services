@@ -28,7 +28,7 @@
         </script>
     </head>
     <body>
-        <div class="header"><a name="kanchor7"></a>
+        <div class="header"><a name="kanchor6"></a>
             <h1>Updating OAuth2 client to use your service instance</h1>
             <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
         </div>
@@ -88,7 +88,7 @@
                     <li value="2">For "scope", in <code>["uaa.none","openid"]</code>, add a comma after "openid" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example:</li>
                     <li class="code">["uaa.none","openid","intelligent-mapping.zones.197a9395-b047-47df-8247-ae6d8db987f4.user"] </li>
                     <li value="3">For "authorities", in <code>["openid","uaa.none","uaa.resource"]</code>, add a comma after "uaa.resource" and then add the oauth-scope, which is the oauth-scope from the VCAP_SERVICES environmental variable. For example</li>
-                    <li class="code">["openid","uaa.none","uaa.resource"," intelligent-mapping.zones.197a9395-b047-47df-8247-ae6d8db987f4.user"]</li>
+                    <li class="code">["openid","uaa.none","uaa.resource","intelligent-mapping.zones.197a9395-b047-47df-8247-ae6d8db987f4.user"]</li>
                 </ul>
                 <li class="continuation">
                     <p class="Note">Make sure the OAuth2 scope is added when creating the Client ID. This is obtained from the VCAP_SERVICES environmental variable of the service you created.</p>

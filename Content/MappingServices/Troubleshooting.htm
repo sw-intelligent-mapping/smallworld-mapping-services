@@ -28,7 +28,7 @@
         </script>
     </head>
     <body>
-        <div class="header"><a name="kanchor17"></a>
+        <div class="header"><a name="kanchor11"></a>
             <h1>Troubleshooting errors</h1>
             <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
         </div>
@@ -52,7 +52,7 @@
                             </p>
                         </td>
                         <td>
-                            <p class="sw_update">Last update: 18th November 2016</p>
+                            <p class="sw_update">Last update: 14th September 2017</p>
                         </td>
                     </tr>
                 </tbody>
@@ -60,11 +60,6 @@
         </div>
         <div class="article">
             <p>This article provides troubleshooting for some of the errors you may encounter during Predix development.</p>
-            <h3>502	Errors</h3>
-            <p>A “Server error, status code: 502” error could be returned when creating a service instance, for example:</p>
-            <div class="code"><pre xml:space="preserve">Server error, status code: 502, error code: 10001, message: </pre><pre xml:space="preserve">The service broker returned an invalid response for the request to </pre><pre xml:space="preserve">https://intelligent-mapping-service-broker-prod.run.aws-usw02-pr.ice.predix.io/v2/service_instances/0a0f7219-5726-474e-99aa-e6632b6143b3?accepts_incomplete=true. </pre><pre xml:space="preserve">Status Code: 500 Internal Server Error, Body: Internal Server Error</pre>
-            </div>
-            <p>This  likely cause of this error is <b>trustedIssuerIds</b> not being specified during the creation of the service instance.</p>
             <h3>401	Errors</h3>
             <p>If you get a 401 error code when sending requests to the Intelligent Mapping or Dynamic Mapping services, check that:</p>
             <ul>
@@ -74,9 +69,8 @@
                     <li value="2">Predix-Zone-Id</li>
                     <li value="3">X-Subtenant-Id</li>
                 </ul>
-                <li value="2">The term “Bearer” in the authorization header has the correct case (it is case-sensitive).</li>
-                <li value="3">The specified Predix-Zone-Id has got the scope and authorization for the services you are trying to use , for example <code>intelligent-mapping.zones.&lt;predix-zone-id&gt;.user</code></li>
-                <li value="4">The UAA you are using as the trustedIssuerIds has been specified correctly when the service instance was created, that is <code>-c'{"trustedIssuerIds":["https://…../oauth/token"]}'</code></li>
+                <li value="2">The specified Predix-Zone-Id has got the scope and authorization for the services you are trying to use , for example <code>intelligent-mapping.zones.&lt;predix-zone-id&gt;.user</code></li>
+                <li value="3">The UAA you are using as the trustedIssuerIds has been specified correctly when the service instance was created, that is <code>-c'{"trustedIssuerIds":["https://…../oauth/token"]}'</code></li>
             </ul>
             <h3>400 Errors</h3>
             <p>If you get a 400 error code when posting GeoJSON to Intelligent Mapping, check that the GeoJSON is valid.</p>
