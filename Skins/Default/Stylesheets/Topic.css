@@ -267,6 +267,7 @@ a.glossaryTerm
 
 .login-dialog.pulse
 {
+	position: fixed;
 	width: 408px;
 	height: 428px;
 	margin-left: -204px;
@@ -537,23 +538,20 @@ a.glossaryTerm
 	color: #005cb9;
 }
 
-.MCDropDownHotSpot_
+.MCDropDown_Open .MCDropDownHotSpot_.MCHotSpotImage
 {
 	background-position: left;
-}
-
-.MCDropDown_Open .MCDropDownHotSpot_
-{
 	background-image: url('minus.png');
 	padding-left: 2px;
-	padding-right: 0px;
+	padding-right: 0;
 }
 
-.MCDropDown_Closed .MCDropDownHotSpot_
+.MCDropDown_Closed .MCDropDownHotSpot_.MCHotSpotImage
 {
+	background-position: left;
 	background-image: url('plus.png');
 	padding-left: 2px;
-	padding-right: 0px;
+	padding-right: 0;
 }
 
 .dropDownHead

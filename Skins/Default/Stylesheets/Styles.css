@@ -564,7 +564,6 @@ html.right-layout .nav-closed #show-hide-navigation:after
 
 .login-dialog-content
 {
-	background: #5A5A5A;
 	-webkit-border-radius: 0 0 3px 3px;
 	-moz-border-radius: 0 0 3px 3px;
 	border-radius: 0 0 3px 3px;
@@ -783,8 +782,8 @@ ul.tree
 	left: 0;
 	margin-top: 3px;
 	padding-left: 12px;
-	background:  url('Images/new-indicator.png') no-repeat;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/new-indicator.png') no-repeat;
+	background: url('Images/new-indicator.png') no-repeat;
+	-pie-background: url('Skins/Default/Stylesheets/Images/new-indicator.png') no-repeat;
 	width: 16px;
 	height: 16px;
 }
@@ -796,22 +795,22 @@ ul.tree
 
 .tree-node.tree-node-collapsed > div
 {
-	background:  url('Images/book.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/book.png') no-repeat 0 3px;
+	background: url('Images/book.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/book.png') no-repeat 0 3px;
 	padding-left: 21px;
 }
 
 .tree-node.tree-node-expanded > div
 {
-	background:  url('Images/book-open.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/book-open.png') no-repeat 0 3px;
+	background: url('Images/book-open.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/book-open.png') no-repeat 0 3px;
 	padding-left: 21px;
 }
 
 .tree-node.tree-node-leaf > div
 {
-	background:  url('Images/topic.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/topic.png') no-repeat 0 3px;
+	background: url('Images/topic.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/topic.png') no-repeat 0 3px;
 	padding-left: 21px;
 }
 
@@ -867,22 +866,22 @@ ul.tree
 
 #index .tree-node.tree-node-collapsed > div
 {
-	background:  url('Images/index-collapsed.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/index-collapsed.png') no-repeat 0 3px;
+	background: url('Images/index-collapsed.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/index-collapsed.png') no-repeat 0 3px;
 	padding-left: 15px;
 }
 
 #index .tree-node.tree-node-expanded > div
 {
-	background:  url('Images/index-expanded.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/index-expanded.png') no-repeat 0 3px;
+	background: url('Images/index-expanded.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/index-expanded.png') no-repeat 0 3px;
 	padding-left: 15px;
 }
 
 #index .tree-node.tree-node-leaf > div
 {
-	background:  url('Images/index.png') no-repeat 0 3px;
-	-pie-background:  url('Skins/Default/Stylesheets/Images/index.png') no-repeat 0 3px;
+	background: url('Images/index.png') no-repeat 0 3px;
+	-pie-background: url('Skins/Default/Stylesheets/Images/index.png') no-repeat 0 3px;
 	padding-left: 15px;
 }
 
@@ -1676,14 +1675,14 @@ a.activityText
 
 .tab-icon #TocTab.tabs-nav-active .tabs-nav-icon
 {
-	background:  url('Images/ContentsTab_16x16.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/ContentsTab_16x16.png');
+	background: url('Images/ContentsTab_16x16.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/ContentsTab_16x16.png');
 }
 
 .tab-icon #TocTab.tabs-nav-inactive .tabs-nav-icon
 {
-	background:  url('Images/ContentsTab_16x16.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/ContentsTab_16x16.png');
+	background: url('Images/ContentsTab_16x16.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/ContentsTab_16x16.png');
 }
 
 .tabs-nav li#TocTab.tabs-nav-inactive
@@ -1718,14 +1717,14 @@ a.activityText
 
 .tab-icon #IndexTab.tabs-nav-active .tabs-nav-icon
 {
-	background:  url('Images/indexActive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/indexActive.png');
+	background: url('Images/indexActive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/indexActive.png');
 }
 
 .tab-icon #IndexTab.tabs-nav-inactive .tabs-nav-icon
 {
-	background:  url('Images/indexInactive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/indexInactive.png');
+	background: url('Images/indexInactive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/indexInactive.png');
 }
 
 .tabs-nav li#IndexTab.tabs-nav-inactive
@@ -1760,14 +1759,14 @@ a.activityText
 
 .tab-icon #GlossaryTab.tabs-nav-active .tabs-nav-icon
 {
-	background:  url('Images/glossaryActive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/glossaryActive.png');
+	background: url('Images/glossaryActive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/glossaryActive.png');
 }
 
 .tab-icon #GlossaryTab.tabs-nav-inactive .tabs-nav-icon
 {
-	background:  url('Images/glossaryInactive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/glossaryInactive.png');
+	background: url('Images/glossaryInactive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/glossaryInactive.png');
 }
 
 .tabs-nav li#GlossaryTab.tabs-nav-inactive
@@ -1802,14 +1801,14 @@ a.activityText
 
 .tab-icon #BrowseSequencesTab.tabs-nav-active .tabs-nav-icon
 {
-	background:  url('Images/browseActive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/browseActive.png');
+	background: url('Images/browseActive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/browseActive.png');
 }
 
 .tab-icon #BrowseSequencesTab.tabs-nav-inactive .tabs-nav-icon
 {
-	background:  url('Images/browseInactive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/browseInactive.png');
+	background: url('Images/browseInactive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/browseInactive.png');
 }
 
 .tabs-nav li#BrowseSequencesTab.tabs-nav-inactive
@@ -1844,14 +1843,14 @@ a.activityText
 
 .tab-icon #CommunityTab.tabs-nav-active .tabs-nav-icon
 {
-	background:  url('Images/communityActive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/communityActive.png');
+	background: url('Images/communityActive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/communityActive.png');
 }
 
 .tab-icon #CommunityTab.tabs-nav-inactive .tabs-nav-icon
 {
-	background:  url('Images/communityInactive.png');
-	-pie-background:  url('Skins/Default/Stylesheets/Images/communityInactive.png');
+	background: url('Images/communityInactive.png');
+	-pie-background: url('Skins/Default/Stylesheets/Images/communityInactive.png');
 }
 
 .tabs-nav li#CommunityTab.tabs-nav-inactive
@@ -2041,12 +2040,12 @@ a.activityText
 	color: #ffffff;
 }
 
-
+#search-field:-moz-placeholder
 {
 	color: #ffffff;
 }
 
-
+#search-field:-ms-input-placeholder
 {
 	color: #ffffff;
 }
