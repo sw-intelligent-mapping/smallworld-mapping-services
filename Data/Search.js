@@ -1,1 +1,1 @@
-define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/A_Navigation/Copyright/swCopyright.htm'],s:['$'],p:[['$',12],['dynamic',4],['not',0],['tile',12]]});
+define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/A_Navigation/Copyright/swCopyright.htm'],s:['$'],p:[['$',12],['dynamic',3],['non',11],['tiered',4]]});
