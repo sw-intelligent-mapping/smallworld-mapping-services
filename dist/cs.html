@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Connectivity Services API</title>
+  <!--<link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />-->
+  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+  <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
+
+  <script src='lib/object-assign-pollyfill.js' type='text/javascript'></script>
+  <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+  <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
+  <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
+  <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+  <script src='lib/handlebars-4.0.5.js' type='text/javascript'></script>
+  <script src='lib/lodash.min.js' type='text/javascript'></script>
+  <script src='lib/backbone-min.js' type='text/javascript'></script>
+  <script src='swagger-ui.js' type='text/javascript'></script>
+  <script src='lib/highlight.9.1.0.pack.js' type='text/javascript'></script>
+  <script src='lib/highlight.9.1.0.pack_extended.js' type='text/javascript'></script>
+  <script src='lib/jsoneditor.min.js' type='text/javascript'></script>
+  <script src='lib/marked.js' type='text/javascript'></script>
+  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+
+  <!-- Some basic translations -->
+  <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
+  <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+  <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+
+  <script type="text/javascript">
+    $(function () {
+      var url = window.location.search.match(/url=([^&]+)/);
+      if (url && url.length > 1) {
+        url = decodeURIComponent(url[1]);
+      } else {
+		url = "https://sw-intelligent-mapping.github.io/smallworld-mapping-services/dist/cs_publicSwagger.yaml";
+      }
+
+      hljs.configure({
+        highlightSizeThreshold: 5000
+      });
+
+      // Pre load translate...
+      if(window.SwaggerTranslator) {
+        window.SwaggerTranslator.translate();
+      }
+      window.swaggerUi = new SwaggerUi({
+        url: url,
+        dom_id: "swagger-ui-container",
+        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+        onComplete: function(swaggerApi, swaggerUi){
+          if(typeof initOAuth == "function") {
+            initOAuth({
+              clientId: "your-client-id",
+              clientSecret: "your-client-secret-if-required",
+              realm: "your-realms",
+              appName: "your-app-name",
+              scopeSeparator: " ",
+              additionalQueryStringParams: {}
+            });
+          }
+
+          if(window.SwaggerTranslator) {
+            window.SwaggerTranslator.translate();
+          }
+        },
+        onFailure: function(data) {
+          log("Unable to Load SwaggerUI");
+        },
+        docExpansion: "none",
+        jsonEditor: false,
+        defaultModelRendering: 'schema',
+        showRequestHeaders: false
+      });
+
+      window.swaggerUi.load();
+
+      function log() {
+        if ('console' in window) {
+          console.log.apply(console, arguments);
+        }
+      }
+  });
+  </script>
+  
+  <style>
+
+.CS_general {background-color: #bcbcbc; color: #ffffff;}
+.CS_put {background-color: #FF9821; color: #ffffff;}
+.CS_post {background-color: #3AB4D4; color: #ffffff;}
+.CS_get {background-color: #2886AF; color: #ffffff;}
+.CS_delete {background-color: #B71125; color: #ffffff;}
+
+.box {
+	border: 1px solid #000000; 
+	width: 900px;
+	font-family: Arial, verdana, sans-serif;
+	margin-top: 10px;
+}
+.column1 {
+	float: left;
+	width: 450px
+	height: 600px;
+}
+.column2 {
+	width: 450px;
+	height: 600px;
+	margin-left: 455px;
+	}
+
+.cell {
+	border: 1px solid #000000; 
+	width: 445px;
+	font-family: Arial, verdana, sans-serif;
+	margin-top: 10px;
+}
+
+.heading, .content {
+	padding: 5px;
+	}
+	
+.content {
+	font-size: 90%;}	
+</style>
+
+</head>
+
+<body class="swagger-section">
+<!--<div id='header'>
+  <div class="swagger-ui-wrap">
+    <a id="logo" href="http://swagger.io"><img class="logo__img" alt="swagger" height="30" width="30" src="images/logo_small.png" /><span class="logo__title">swagger</span></a>
+    <form id='api_selector'>
+      <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
+      <div id='auth_container'></div>
+      <div class='input'><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>
+    </form>
+  </div>
+</div>
+-->
+
+<div id="cheat_sheet" class="swagger-ui-wrap">
+
+<!--
+<h1>Connectivity Service API</h1>
+
+<h1>Summary</h1>
+
+
+<div class="box">
+	<div class="heading CS_general"><b>Headers</b></div>
+	<div class="content">
+		Predix-Zone-Id: 785aabb0-a626-47a1-837c-78b3dba266eb</br>
+		X-Subtenant-Id: subtenant1</br>
+		Authorization: Bearer eyJhbGciOiJSUzI...</br>
+		Content-Type: application/json</br>
+	</div>
+</div>
+
+
+<div class="box">
+	<div class="heading CS_general"><b>Endpoints</b></div>
+	<div class="content">
+		BASIC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; https://dynamic-mapping-prod.run.aws-usw02-pr.ice.predix.io/v1/…</br>
+		SELECT 	&nbsp;&nbsp; https://dynamic-mapping-prod.run.asv-pr.ice.predix.io/v1/...
+	</div>
+</div>
+
+<div class="column1">
+
+
+
+	<div class="cell">
+		<div class="heading CS_put"><b>Add an Asset History Location</b></div>
+		<div class="content">
+			PUT …v1/collections/trucks/assets/truck01</br>
+			BODY</br>
+			{</br>
+			“location”:[0.1186273,52.2404057],</br>
+			”timestamp”: ”2016-11-14T10:20:50.52Z”,</br>
+			“retain_history”: true</br>
+			}
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_put"><b>Update an Asset Location</b></div>
+		<div class="content">
+			PUT …v1/collections/trucks/assets/truck01 </br>
+			BODY </br>
+			{ </br>
+			“location”:[0.1186273,52.2404057], </br>
+			”timestamp”: ”2016-11-14T10:20:50.52Z”, </br>
+			“retain_history”: false </br>
+			}
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_get"><b>Get Latest Asset Location</b></div>
+		<div class="content">
+			GET …v1/collections/trucks/assets/truck01
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_get"><b>List All Collections</b></div>
+		<div class="content">
+			GET …v1/collections
+		</div>
+</div>
+
+	<div class="cell">
+		<div class="heading CS_get"><b>Get a List of all Assets in a Collection</b></div>
+		<div class="content">
+			GET …v1/collections/trucks
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_delete"><b>Delete a Collection</b></div>
+		<div class="content">
+			DELETE …v1/collections/trucks
+		</div>
+</div>
+
+
+	
+</div>
+<div class="column2">
+
+
+
+	<div class="cell">
+		<div class="heading CS_post"><b>Get Asset Locations within a 2 hour period</b></div>
+		<div class="content">
+			POST …v1/collections/trucks/assets/truck01/query?type=timeperiod</br>
+			BODY</br>
+			{</br>
+			“start”: “2016-11-14T08:20:50.52Z”,</br>
+			“end”: “2016-11-14T10:20:50.52Z”</br>
+			}</br>
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="heading CS_post"><b>Get 5 Latest asset Locations</b></div>
+		<div class="content">
+				POST …v1/collections/trucks/assets/truck01/query?type=latest</br>
+				BODY</br>
+				{</br>
+				“limit”: 5</br>
+				}</br>
+		</div>
+	</div>
+	
+	<div class="cell">
+		<div class="heading CS_post"><b>Get Asset Locations within 2 hours within Bounding box</b></div>
+		<div class="content">
+			POST …v1/collections/trucks/assets/truck01/query?type=bbox</br>
+			BODY</br>
+			{</br>
+			“start”: “2016-11-14T08:20:50.52Z”,</br>
+			“end”: “2016-11-14T10:20:50.52Z”,</br>
+			“bbox”: {</br>
+			“left”: 0.1186273,</br>
+			“right”:0.1456344,</br>
+			“top”:50.2404057,</br>
+			“bottom”:53.2404057</br>
+			}</br>
+			}
+		</div>
+	</div>	
+	
+	<div class="cell">
+		<div class="heading CS_delete"><b>Delete an Asset and All of its Locations</b></div>
+		<div class="content">
+				DELETE …v1/collections/trucks/assets/truck01
+		</div>
+	</div>
+	
+
+	
+</div>-->
+
+</div>
+
+<div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
+<div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</body>
+</html>

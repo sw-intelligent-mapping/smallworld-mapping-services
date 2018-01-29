@@ -1,0 +1,733 @@
+swagger: '2.0'
+info:
+  title: Connectivity Service
+  description: Connectivity Service
+  version: 0.0.1
+schemes:
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  oauth:
+    type: oauth2
+    authorizationUrl: 'https://your-trusted-issuer.example.com'
+    flow: implicit
+    scopes: {}
+paths:
+  '/v1/versions/{targetVersion}/maps/v1/collections':
+    get:
+      summary: List all collections
+      description: |
+        Returns the names of all the collections.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+      produces:
+        - application/json
+      tags:
+        - Maps
+        - Collections
+      responses:
+        '200':
+          description: >-
+            Operation was a success. Response is an object containing an array
+            of collection names.
+          schema:
+            $ref: '#/definitions/CollectionNames'
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}':
+    get:
+      summary: Return all data for a collection
+      description: |
+        Returns the full GeoJSON FeatureCollection uploaded for this collection.
+        All GeoJSON Features will be as originally uploaded with the addition of
+        a featureId attribute that uniquely identifies the feature across all
+        your collections.
+      security:
+        - oauth: []
+      produces:
+        - application/json
+      tags:
+        - Maps
+        - Collections
+      responses:
+        '200':
+          description: Operation was a success. Response is a collection of features.
+          schema:
+            $ref: '#/definitions/FeatureCollectionWithFeatureId'
+        '404':
+          description: Collection could not be found.
+        '500':
+          description: Unexpected error.
+      parameters:
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+  '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}/spatial-query':
+    post:
+      summary: >
+        For 'within' operator - find all points within an area.
+
+        For 'nearest' operator - return the nearest point to the one specified.
+
+        For 'lineIntersectsLine' - find all points of intersection between two
+        linestrings.
+      description: >
+        'Within' returns GeoGJSON of type FeatureCollection containing all
+        GeoJSON features within the provided polygon.
+
+        'Nearest' returns a FeatureCollection with the longitude and latitude of
+        the nearest point.
+
+        'LineIntersectsLine' returns a FeatureCollection containing all points
+        of intersection as GeoJSON features.
+      security:
+        - oauth: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+        - name: operator
+          description: >
+            For 'within' query - a geojson polygon which we wish to search.
+
+            For 'nearest' query - an object with longitude and latitude of the
+            point.
+
+            For 'lineIntersectsLine' - an array with two string IDs of the
+            geojson linestrings
+          required: true
+          type: string
+          enum:
+            - within
+            - nearest
+            - lineIntersectsLine
+          in: query
+        - name: body
+          in: body
+          description: |
+            An object with longitude and latitude of the specified point.
+          required: true
+          schema:
+            $ref: '#/definitions/QueryGeometry'
+      tags:
+        - Maps
+        - Collections
+        - Query
+      responses:
+        '200':
+          description: >-
+            Operation was a success. Response is a collection containing the
+            nearest feature.
+          schema:
+            $ref: '#/definitions/FeatureCollectionWithFeatureId'
+        '400':
+          description: |
+            Incorrect longitude or latitude.
+        '404':
+          description: |
+            Named collection not found.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}/spatial-query/bbox-interacts':
+    get:
+      summary: Return collection features in specified bounding box
+      description: |
+        Returns all features in the specified collection that exist fully or
+        partially within the specified bounding box. The bounding box is defined
+        by two coordinates in the EPSG:4326 (WGS84) (for further details see
+        http://epsg.io/4326):
+        * left (longitude), bottom (latitude)
+        * right (longitude), top (latitude)
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+        - name: left
+          in: query
+          description: Left longitude coordinate of bounding box.
+          required: true
+          type: number
+        - name: right
+          in: query
+          description: Right longitude coordinate of bounding box.
+          required: true
+          type: number
+        - name: top
+          in: query
+          description: Top latitude coordinate of bounding box.
+          required: true
+          type: number
+        - name: bottom
+          in: query
+          description: Bottom latitude coordinate of bounding box.
+          required: true
+          type: number
+      tags:
+        - Maps
+        - Collections
+        - Query
+      responses:
+        '200':
+          description: A GeoJSON feature collection is returned.
+          schema:
+            $ref: '#/definitions/FeatureCollectionWithFeatureId'
+        '404':
+          description: Collection does not exist.
+        default:
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}/features':
+    get:
+      summary: Return feature
+      description: >
+        Returns GeoJSON of type FeatureCollection containing all GeoJSON
+        features
+
+        from the named collection with a matching GeoJSON id.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/featureId'
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+      tags:
+        - Maps
+        - Collections
+        - Query
+      responses:
+        '200':
+          description: >-
+            GeoJSON FeatureCollection containing 0, 1 or more GeoJSON features
+            is returned.
+          schema:
+            $ref: '#/definitions/FeatureCollectionWithFeatureId'
+        '404':
+          description: Collection does not exist.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}/collectionSize':
+    get:
+      summary: Return the size of a collection.
+      description: >
+        Returns the size of the specified collection to decide whether to use
+        the whole collection for spatial query
+
+        or not.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/collectionName'
+        - $ref: '#/parameters/targetVersion'
+      tags:
+        - Maps
+        - Collections
+        - Query
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Operation was successful. Response is the size of given collection.
+          schema:
+            $ref: '#/definitions/GetCollectionSizeSchema'
+        '404':
+          description: Specified collection was not found.
+        default:
+          description: Unexpected error
+  /v1/versions:
+    get:
+      summary: Return the set of versions available in the database
+      description: |
+        Return the set of versions available in the database.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+      produces:
+        - application/json
+      tags:
+        - Versions
+      responses:
+        '200':
+          description: |
+            Returns a JSON array of all the versions available.
+          schema:
+            $ref: '#/definitions/VersionRequest'
+        '400':
+          description: |
+            Bad request.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/network-status':
+    get:
+      summary: Get the current status of the topology for the given version
+      description: |
+        Get the current status of the topology for the given version.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+      tags:
+        - Tracing
+      responses:
+        '200':
+          description: |
+            Returns the status of the network specified.
+          schema:
+            $ref: '#/definitions/NetworkStatusOutput'
+        '400':
+          description: 'Bad request, you have entered one of the parameters incorrectly.'
+        '404':
+          description: Version not found.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}/refresh-topology':
+    post:
+      summary: Refresh the topology view for the given version
+      description: |
+        Refresh the topology view for the given version.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+      consumes:
+        - application/json
+      tags:
+        - Tracing
+      responses:
+        '204':
+          description: |
+            The topology refresh was successful.
+        '400':
+          description: 'Bad request, you have entered one of the parameters incorrectly.'
+        '404':
+          description: Version not found.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{versionSelector}/resources/{resourceType}/{resourceId}':
+    get:
+      summary: >-
+        Return the resource of the given ID from the resource-type and version
+        specified
+      description: >
+        Return the resource from the specified object types and version.
+
+        Data pulled from this request is more detailed than when pulled as a
+        set.
+      security:
+        - oauth: []
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/versionSelector'
+        - $ref: '#/parameters/resourceType'
+        - $ref: '#/parameters/resourceId'
+      tags:
+        - Resources
+      responses:
+        '200':
+          description: >
+            Returns a JSON object of the resources that match the type and ID
+            given.
+          schema:
+            $ref: '#/definitions/ResourceIdOutput'
+        '400':
+          description: |
+            Bad request.
+        '404':
+          description: 'The version, resource type or resource ID specified was not found.'
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{versionSelector}/resources/{resourceType}/{resourceId}/query/{queryType}':
+    post:
+      summary: Run a query
+      description: >
+        A query is run on a set of resources using the specified ID as a
+        reference (start node).
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/versionSelector'
+        - $ref: '#/parameters/resourceType'
+        - $ref: '#/parameters/resourceId'
+        - $ref: '#/parameters/queryType'
+        - $ref: '#/parameters/limitType'
+        - $ref: '#/parameters/offsetType'
+        - name: body
+          in: body
+          description: >
+            Contains other parameters which may be required for the query to
+            execute.
+          required: true
+          schema:
+            $ref: '#/definitions/Query'
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      tags:
+        - Query Resources
+      responses:
+        '200':
+          description: >
+            The post operation was successful, the results of the query has been
+            returned.
+          schema:
+            $ref: '#/definitions/QueryOutput'
+        '400':
+          description: 'Bad request, you have entered one of the parameters incorrectly.'
+        '404':
+          description: Resource not found.
+        '500':
+          description: Unexpected error.
+  '/v1/versions/{targetVersion}':
+    delete:
+      summary: Delete the data from the version specified
+      description: |
+        Delete the data from the version specified.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+      tags:
+        - Resources
+      responses:
+        '204':
+          description: |
+            Data in the specified version has been deleted.
+        '400':
+          description: 'Bad request, you have entered one of the parameters incorrectly.'
+        '404':
+          description: 'The version, resource type or resource ID specified was not found.'
+        '500':
+          description: Unexpected error.
+  '/v1/uploads/versions/{targetVersion}/complete':
+    post:
+      summary: Posts new file to the ingestion service
+      description: >
+        Posts a zip containing XML & GML data or just an XML file to the service
+        asynchronously to the version specified.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/tenantId'
+        - $ref: '#/parameters/targetVersion'
+        - name: body
+          in: body
+          description: |
+            CIM or zip file to post to the server
+          required: true
+          schema:
+            $ref: '#/definitions/ResourceUploadRequest'
+      produces:
+        - application/json
+      consumes:
+        - application/octet-stream
+        - application/xml
+      tags:
+        - Uploads
+      responses:
+        '201':
+          description: >
+            The post operation was successful, the body of the request has been
+            passed to the
+
+            async process manager.
+          schema:
+            $ref: '#/definitions/ResourceRequestOutput'
+        '400':
+          description: 'Bad request, you have entered one of the parameters incorrectly.'
+        '500':
+          description: Unexpected error.
+  '/v1/uploads/ticket/{ticketNumber}':
+    get:
+      summary: Returns the status of the ticket provided
+      description: |
+        Returns the status of the ticket provided.
+      security:
+        - oauth: []
+      parameters:
+        - $ref: '#/parameters/ticketNumber'
+      produces:
+        - application/json
+      tags:
+        - Uploads
+      responses:
+        '200':
+          description: |
+            Returns the status of the ticket number provided.
+          schema:
+            $ref: '#/definitions/StatusRequest'
+        '404':
+          description: |
+            Ticket number did not exist.
+        '500':
+          description: Unexpected error.
+parameters:
+  tenantId:
+    name: predix-zone-id
+    description: >-
+      The tenant identifier.  For Predix, this is the instanceId value specified
+      in the VCAP-SERVICES environment variable.
+    in: header
+    pattern: >-
+      ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+    required: true
+    type: string
+    format: uuid
+  collectionName:
+    name: collectionName
+    description: Name of asset collection.
+    in: path
+    required: true
+    type: string
+  featureId:
+    name: id
+    in: query
+    description: Feature identifier.
+    required: true
+    type: string
+    minLength: 1
+  resourceId:
+    name: resourceId
+    in: path
+    description: Resource identifier.
+    required: true
+    type: string
+    pattern: '^[A-Za-z0-9_\-\.]+$'
+  resourceType:
+    name: resourceType
+    in: path
+    description: Resource type identifier.
+    required: true
+    type: string
+    pattern: '^[A-Za-z0-9.]+$'
+  versionSelector:
+    name: versionSelector
+    in: path
+    description: Version identifier.
+    required: true
+    type: string
+    maxLength: 50
+    pattern: '^[A-Za-z0-9_\-\:]+$'
+  targetVersion:
+    name: targetVersion
+    in: path
+    description: Version identifier.
+    required: true
+    type: string
+    maxLength: 50
+    pattern: '^[A-Za-z0-9_\-\:]+$'
+  queryType:
+    name: queryType
+    description: |
+      Query identifier. Possible values include: trace.
+    in: path
+    required: true
+    type: string
+    enum:
+      - trace
+  limitType:
+    name: limit
+    in: query
+    description: Maximum number of records to return.
+    type: integer
+    minimum: 1
+  offsetType:
+    name: offset
+    description: Number of records to skip before returning.
+    in: query
+    type: integer
+    minimum: 0
+  ticketNumber:
+    name: ticketNumber
+    description: ticket ID.
+    in: path
+    type: string
+    required: true
+  instanceId:
+    name: instanceId
+    in: path
+    description: Instance identifier.
+    required: true
+    type: string
+    pattern: >-
+      ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+  bindingId:
+    name: bindingId
+    in: path
+    description: Binding identifier.
+    required: true
+    type: string
+    pattern: .+
+  brokername:
+    name: brokername
+    in: path
+    description: Broker identifier.
+    required: true
+    type: string
+    pattern: '^[A-Za-z0-9_-]+$'
+definitions:
+  FeatureCollectionWithFeatureId:
+    type: object
+    description: |
+      Standard GeoJSON FeatureCollection with each Feature tagged with a
+      featureId.
+  CollectionNames:
+    description: An array of collection names.
+    type: object
+    properties:
+      collections:
+        type: array
+        items:
+          type: string
+  QueryGeometry:
+    type: object
+    description: >
+      Geojson geometry, or an object with longitude/latitude. All coordinates in
+      ESPG:4326 (WGS84).
+    properties:
+      longitude:
+        type: number
+      latitude:
+        type: number
+  GetCollectionSizeSchema:
+    type: object
+    properties:
+      collection_size:
+        type: number
+        description: The size of the specified collection.
+  Query:
+    type: object
+    description: >
+      JSON object containing parameters related to the query type being
+      requested to run.
+  VersionRequest:
+    type: object
+    description: |
+      JSON array of the versions in the system.
+    properties:
+      results:
+        type: array
+        items:
+          type: object
+        description: >-
+          Contains an array of versions in the system. Normal and operational
+          selectors are reserved.
+  StatusRequest:
+    type: object
+    description: |
+      JSON array of the status of a given ticket.
+    properties:
+      ticket:
+        type: string
+        description: The ticket number you are querying.
+      status:
+        type: string
+        description: The upload status of that ticket.
+  ResourceUploadRequest:
+    description: |
+      Contains the CIM file for upload.
+  ResourceUploadRequestDevOnly:
+    type: object
+    description: |
+      Contains CIM file for upload.
+  ResourceRequestOutput:
+    type: object
+    description: |
+      JSON object detailing the success of the uploaded CIM object.
+    properties:
+      ticket:
+        type: string
+        description: The ticket number the service has assigned to your upload.
+  ResourceTypeRequest:
+    type: object
+    description: >
+      JSON object of all the resources of the type with enough information for
+      display purposes.
+    properties:
+      results:
+        type: object
+        description: Array of general information on the resources being requested.
+  QueryOutput:
+    type: object
+    description: |
+      JSON array of results from querying the database.
+    properties:
+      results:
+        type: array
+        items:
+          type: object
+        description: Contains parameters for tracing.
+  ResourceIdOutput:
+    type: object
+    description: |
+      JSON object of the specific resource being pulled.
+    properties:
+      results:
+        type: object
+        description: Attributes that belong to the resource queried.
+  TerminalsOutput:
+    type: object
+    description: |
+      JSON object of the terminals for the specific resource being pulled.
+  ConnectionsOutput:
+    type: object
+    description: >
+      JSON object of the connected equipment for the specific resource being
+      pulled.
+  NetworkStatusOutput:
+    type: object
+    description: |
+      JSON object of the network status for the given version.
+  ProvisioningInput:
+    type: object
+    properties:
+      parameters:
+        type: object
+        description: |
+          Configuration parameters for the instance
+        properties:
+          trustedIssuerIds:
+            type: array
+            description: |
+              Trusted token provider URLs
+            items:
+              type: string
+              pattern: '^https:\/\/[A-Za-z0-9_.~!$&()*+,=:@%/-]*$'
+            minItems: 1
+        required:
+          - trustedIssuerIds
+    required:
+      - parameters
+  BindingInput:
+    type: object
+    description: |
+      Binding configuration parameters
+    properties:
+      service_id:
+        type: string
+        description: |
+          The ID of the service to which to bind, defined in the service catalog
+      plan_id:
+        type: string
+        description: |
+          The ID of the plan to which to bind, defined in the service catalog
+    required:
+      - service_id
+      - plan_id
