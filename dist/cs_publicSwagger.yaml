@@ -335,6 +335,7 @@ paths:
         - $ref: '#/parameters/versionSelector'
         - $ref: '#/parameters/resourceType'
         - $ref: '#/parameters/resourceId'
+        - $ref: '#/parameters/includeSpatial'
       tags:
         - Resources
       responses:
@@ -444,10 +445,8 @@ paths:
       responses:
         '201':
           description: >
-            The post operation was successful, the body of the request has been
-            passed to the
-
-            async process manager.
+            Successfully posted data for ingestion.  Track the returned ticket
+            to monitor progress
           schema:
             $ref: '#/definitions/ResourceRequestOutput'
         '400':
@@ -476,6 +475,29 @@ paths:
         '404':
           description: |
             Ticket number did not exist.
+        '500':
+          description: Unexpected error.
+  /v1/build-info:
+    get:
+      summary: >-
+        Returns a JSON Object which contains the apps version and its time
+        stamp.
+      description: >
+        Returns a JSON Object which contains the apps build version and its time
+        stamp.
+      produces:
+        - application/json
+      tags:
+        - Build information
+      responses:
+        '200':
+          description: |
+            Returns a JSON array of the build version and its time stamp.
+          schema:
+            $ref: '#/definitions/BuildRequest'
+        '400':
+          description: |
+            Bad request.
         '500':
           description: Unexpected error.
 parameters:
@@ -554,6 +576,12 @@ parameters:
     in: query
     type: integer
     minimum: 0
+  includeSpatial:
+    name: includeSpatial
+    in: query
+    description: Used to ask for spatial data on the feature being queried
+    required: false
+    type: boolean
   ticketNumber:
     name: ticketNumber
     description: ticket ID.
@@ -695,6 +723,15 @@ definitions:
     type: object
     description: |
       JSON object of the network status for the given version.
+  BuildRequest:
+    type: object
+    description: |
+      JSON object containing build information
+    properties:
+      buildVersion:
+        type: string
+      buildTimeStamp:
+        type: string
   ProvisioningInput:
     type: object
     properties:
@@ -709,7 +746,7 @@ definitions:
               Trusted token provider URLs
             items:
               type: string
-              pattern: '^https:\/\/[A-Za-z0-9_.~!$&()*+,=:@%/-]*$'
+              pattern: '^https?:\/\/[A-Za-z0-9_.~!$&()*+,=:@%/-]*$'
             minItems: 1
         required:
           - trustedIssuerIds
