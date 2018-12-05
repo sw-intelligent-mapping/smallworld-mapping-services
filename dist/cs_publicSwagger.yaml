@@ -39,75 +39,11 @@ paths:
             Bad request.
         '500':
           description: Unexpected error.
-  '/v1/versions/{targetVersion}/network-status':
-    get:
-      summary: |
-        Gets the current status of the topology view for the given version
-      description: >
-        Gets the current status of the topology view for the given version.  If
-        the status is "ok", then network tracing
-
-        queries will return correct results.  If the status is "invalid", then
-        network tracing queries may not return
-
-        correct results until a POST request to the /refresh-topology endpoint
-        is made.
-      security:
-        - oauth: []
-      parameters:
-        - $ref: '#/parameters/tenantId'
-        - $ref: '#/parameters/targetVersion'
-      tags:
-        - Data Ingestion
-      responses:
-        '200':
-          description: >
-            Get operation was successful, response is the status of the network
-            specified.
-          schema:
-            $ref: '#/definitions/NetworkStatusResponse'
-        '400':
-          description: 'Bad request, one of the parameters was entered incorrectly.'
-        '500':
-          description: Unexpected error.
-  /v1/refresh-topology:
-    post:
-      summary: Post request to refresh topology view
-      description: >
-        Post request to refresh the topology view.  Once this call has been
-        made, network tracing queries will return
-
-        correct results for all network versions.  The current status of the
-        topology view for a given network version
-
-        can be determined by making a GET request to the
-        /versions/${targetVersion}/network-status endpoint.
-      security:
-        - oauth: []
-      parameters:
-        - $ref: '#/parameters/tenantId'
-      consumes:
-        - application/json
-      tags:
-        - Data Ingestion
-      responses:
-        '204':
-          description: |
-            Post operation was successful, topology refresh executed.
-        '400':
-          description: 'Bad request, one of the parameters was entered incorrectly.'
-        '500':
-          description: Unexpected error.
   '/v1/versions/{versionSelector}/resources/{resourceType}/{resourceId}':
     get:
       summary: Gets a single resource
-      description: >
-        Gets the resource from the specified object types and version.
-
-        Data pulled from this request is more detailed than when pulled as a set
-        using the
-
-        /versions/{versionSelector}/resources/{resourceType} endpoint.
+      description: |
+        Gets the resource from the specified resource type and version.
       security:
         - oauth: []
       produces:
@@ -201,56 +137,6 @@ paths:
           description: 'Bad request, one of the parameters was entered incorrectly.'
         '404':
           description: The version specified was not found.
-        '500':
-          description: Unexpected error.
-  '/v1/uploads/versions/{targetVersion}/complete':
-    post:
-      summary: Posts new file to the ingestion service
-      description: >
-        Asynchronously posts a file to the ingestion service for the version
-        specified.
-
-        <br>The file contents can be provided as the body of the request or as a
-        URL that is used to retrieve the file via a HTTP GET request.
-
-        <br>The file can be either a CIM (XML) file, a CMS-JSON file or a zip
-        file (containing CIM XML and GML).
-
-        <br>Ingested equipment is associated with a subnetwork named
-        'cms*default'.
-      security:
-        - oauth: []
-      parameters:
-        - $ref: '#/parameters/maxRetries'
-        - $ref: '#/parameters/tenantId'
-        - $ref: '#/parameters/targetVersion'
-        - name: body
-          in: body
-          description: |
-            File to post to the server or a URL that references the file.
-          required: true
-          schema:
-            $ref: '#/definitions/ResourceUploadRequest'
-      produces:
-        - application/json
-      consumes:
-        - application/octet-stream
-        - application/xml
-        - application/vnd.ge-cms+json
-        - application/vnd.ge-cmsref+json
-      tags:
-        - Data Ingestion
-      responses:
-        '201':
-          description: >
-            Post operation successfully posted data for ingestion.
-
-            Response is a ticket ID that can be used to monitor the progress of
-            the ingestion.
-          schema:
-            $ref: '#/definitions/ResourceUploadResponse'
-        '400':
-          description: 'Bad request, one of the parameters was entered incorrectly.'
         '500':
           description: Unexpected error.
   /v1/uploads/tickets:
@@ -418,10 +304,13 @@ paths:
         <br>The file can be either a CIM (XML) file, a CMS-JSON file or a zip
         file (containing CIM XML and GML).
 
-        <br>The infer parameter currently only supports one value, feeder. If
-        this parameter and
+        <br>Any existing equipment in the specified version and subnetwork that
+        is not shared with any other subnetwork is deleted prior to ingestion.
 
-        value are used, body must contain zero or one feeder IDs&#58;
+        <br>If the optional validateConnectivity parameter is set to “true” or
+        not set, the service checks for a valid feeder before ingesting the
+        subnetwork. This check validates that the message body contains zero or
+        one feeder IDs as follows&#58;
 
         * If the body contains one feeder and that feeder has a terminal in the
         specified subnetwork,
@@ -437,10 +326,10 @@ paths:
         * If the body contains no feeders or one feeder has zero terminals in
         the specified subnetwork,
 
-        the insertion process checks for breakers with a normal state of
-        'closed'&#58;
+        the insertion process checks for closed breakers, which are breakers
+        with a normal state of 'closed'&#58;
 
-        ** If the check returns one breaker that has one terminal that is
+        -- If the check returns one breaker that has one terminal that is
         connected to another object
 
         in the subnetwork, the request is processed. If the terminal has an
@@ -451,24 +340,28 @@ paths:
 
         feeder ID is added to the ticket information.
 
-        ** If the check returns no breakers, more than one breaker, one breaker
-        with no terminals
+        -- If the check returns no breakers or one breaker with no terminals
+        connected to other objects in the subnetwork, the request is
 
-        connected to other objects in the subnetwork or one breaker with more
-        than one terminal connected
+        invalid and the breaker ID is added to the ticket information.
 
-        to other objects in the subnetwork, the request is invalid and the
-        breaker IDs are added to the ticket
+        -- If there are multiple closed breakers, the breakers are checked to
+        see if any are boundary features, that is, the breaker is closed and it
+        is only connected to the circuit by one terminal.
 
-        information.
+        If a single breaker is a boundary feature, the request is processed and 
+        the breaker is marked as the logical source of the circuit. If multiple
+        breakers are boundary features, the request is invalid and the breaker
+        IDs are added to the ticket information.
       security:
         - oauth: []
       parameters:
-        - $ref: '#/parameters/ingestionInferences'
+        - $ref: '#/parameters/validateConnectivity'
         - $ref: '#/parameters/maxRetries'
         - $ref: '#/parameters/tenantId'
         - $ref: '#/parameters/targetVersion'
         - $ref: '#/parameters/targetSubnetwork'
+        - $ref: '#/parameters/webhookUrl'
         - name: body
           in: body
           description: |
@@ -604,6 +497,8 @@ paths:
             all of the collection names.
           schema:
             $ref: '#/definitions/CollectionsResponse'
+        '400':
+          description: 'Bad request, one of the parameters was entered incorrectly.'
         '500':
           description: Unexpected error.
   '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}':
@@ -626,6 +521,8 @@ paths:
           description: Get operation was successful. Response is a collection of features.
           schema:
             $ref: '#/definitions/FeatureCollectionResponse'
+        '400':
+          description: 'Bad request, one of the parameters was entered incorrectly.'
         '404':
           description: Collection could not be found.
         '500':
@@ -716,8 +613,10 @@ paths:
           description: Unexpected error.
   '/v1/versions/{targetVersion}/maps/v1/collections/{collectionName}/spatial-query/bbox-interacts':
     get:
+      deprecated: true
       summary: Returns a collection of features within the specified bounding box
       description: |
+        Deprecated - use POST method instead.
         Returns all features in the specified collection that exist fully or
         partially within the specified bounding box. The bounding box is defined
         by two coordinates in the EPSG:4326 (WGS84) (for further details see
@@ -757,6 +656,8 @@ paths:
           description: A GeoJSON feature collection is returned.
           schema:
             $ref: '#/definitions/FeatureCollectionResponse'
+        '400':
+          description: 'Bad request, one of the parameters was entered incorrectly.'
         '404':
           description: Collection does not exist.
         '500':
@@ -829,6 +730,8 @@ paths:
             0, 1 or more GeoJSON features is returned.
           schema:
             $ref: '#/definitions/FeatureCollectionResponse'
+        '400':
+          description: 'Bad request, one of the parameters was entered incorrectly.'
         '404':
           description: Collection does not exist.
         '500':
@@ -855,6 +758,8 @@ paths:
             collection.
           schema:
             $ref: '#/definitions/CollectionSizeResponse'
+        '400':
+          description: 'Bad request, one of the parameters was entered incorrectly.'
         '404':
           description: Specified collection was not found.
         '500':
@@ -871,6 +776,13 @@ parameters:
     required: true
     type: string
     format: uuid
+  webhookUrl:
+    name: webhookUrl
+    in: query
+    description: The endpoint for POSTing status updates.
+    required: false
+    type: string
+    format: uri
   resourceId:
     name: resourceId
     in: path
@@ -887,13 +799,6 @@ parameters:
     required: true
     type: string
     pattern: '^[A-Za-z0-9.]+$'
-  nodeId:
-    name: nodeId
-    in: path
-    description: Connectivity node identifier.
-    required: true
-    type: string
-    pattern: '^[A-Za-z0-9_\-\.]+$'
   versionSelector:
     name: versionSelector
     in: path
@@ -946,11 +851,33 @@ parameters:
     required: true
   statusFilter:
     name: statusFilter
-    description: A comma separated list of ticket statuses.
+    description: >
+      A comma separated list of ticket statuses.
+
+      In 'try it out' you can select all the required items from the drop-down
+      list
+
+      (for multiple selections, use Cmd-click on Macintosh and Ctrl-click on
+      Windows).
+    type: array
+    items:
+      type: string
+      enum:
+        - created
+        - staging-error
+        - staged
+        - queuing-error
+        - queued
+        - validating
+        - failed-to-validate
+        - validated
+        - processing
+        - processed
+        - failed-to-process
+        - failed-to-ack
+        - failed-to-delete
     in: query
-    type: string
     required: false
-    pattern: '^[a-z-]+(,[a-z-]+)*$'
   maxRetries:
     name: maxRetries
     description: |
@@ -959,15 +886,14 @@ parameters:
     required: false
     type: integer
     minimum: 0
-  ingestionInferences:
-    name: infer
+  validateConnectivity:
+    name: validateConnectivity
     description: >
-      A comma separated list of inference engines to be run on ingestion, to
-      create missing data if it can be inferred
+      A value of "true" specifies that the connectivity of a subnetwork should
+      be validated.
     in: query
-    required: false
-    type: string
-    pattern: feeder
+    type: boolean
+    default: true
   collectionName:
     name: collectionName
     description: Name of asset collection.
@@ -1070,15 +996,12 @@ definitions:
       ticketNumber:
         type: object
         properties:
-          ticket:
-            type: string
-            description: The ticket number.
-          status:
-            type: string
-            description: The upload status of the ticket.
           info:
             type: string
             description: Information about any errors whilst processing the ticket.
+          status:
+            type: string
+            description: The upload status of the ticket.
   SubnetworksResponse:
     type: object
     description: |
@@ -1219,20 +1142,6 @@ definitions:
                           items:
                             type: number
                             format: float
-  NetworkStatusResponse:
-    type: object
-    properties:
-      network:
-        type: string
-        description: The name of the network.
-      status:
-        type: string
-        description: The status of the network.
-        enum:
-          - ok
-          - invalid
-    description: |
-      JSON object of the network status for the given version.
   VersionDeleteResponse:
     type: object
   SubnetworkFeederResponse:
