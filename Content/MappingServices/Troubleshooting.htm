@@ -28,7 +28,7 @@
         </script>
     </head>
     <body>
-        <div class="header"><a name="kanchor11"></a>
+        <div class="header"><a name="kanchor4"></a>
             <h1>Troubleshooting errors</h1>
             <p class="sw_version">Intelligent Mapping and Dynamic Mapping services</p>
         </div>
@@ -52,7 +52,7 @@
                             </p>
                         </td>
                         <td>
-                            <p class="sw_update">Last update: 14th September 2017</p>
+                            <p class="sw_update">Last update: May 2019</p>
                         </td>
                     </tr>
                 </tbody>
@@ -73,7 +73,7 @@
                 <li value="3">The UAA you are using as the trustedIssuerIds has been specified correctly when the service instance was created, that is <code>-c'{"trustedIssuerIds":["https://…../oauth/token"]}'</code></li>
             </ul>
             <h3>400 Errors</h3>
-            <p>If you get a 400 error code when posting GeoJSON to Intelligent Mapping, check that the GeoJSON is valid.</p>
+            <p>If you get a 400 error code when posting GeoJSON to Intelligent Mapping, check that the GeoJSON is valid. Intelligent Mapping does not support GeoJSON containing GeometryCollections or features without Geometry.</p>
         </div>
     </body>
 </html>
